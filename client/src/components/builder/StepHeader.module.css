@@ -81,6 +81,16 @@
   display: block;
 }
 
+@media (min-width: 64rem) {
+  .stepLabelRow:not(.stepLabelRowFirst) {
+    border-top: 1px solid var(--step-label-row-border-color);
+  }
+
+  .header[aria-expanded='false'] .selectedCount {
+    display: none;
+  }
+}
+
 @media (max-width: 63.9375rem) {
   .stepLabelRow {
     padding-top: 5px;
