@@ -1,0 +1,89 @@
+---
+description: Bundle Builder project context, architecture, and workflow conventions
+alwaysApply: true
+---
+
+# Bundle Builder — Project Context
+
+Wyze-style multi-step security bundle builder (frontend take-home). Spec: `task/task.md`. Design refs: `task/*.png`.
+
+## Git workflow
+
+- **Branch names**: descriptive feature names only — never include user-story IDs (`us-01`, `US-02`, etc.)
+  - Good: `feature/supabase-catalog`, `feature/review-panel`, `fix/stepper-sync`
+  - Bad: `feature/us-02-supabase-catalog`, `us-03-api`
+- User stories (US-01…US-13) live in the plan only; use them for scope, not branch names.
+
+## Monorepo
+
+```
+client/   React 19 + Vite + TypeScript
+server/   Express 5 + TypeScript (BFF)
+supabase/ SQL migrations (steps, products, variants)
+```
+
+Scripts: `npm run dev` | `build` | `test` | `lint`
+
+## Stack
+
+| Layer | Choice |
+|-------|--------|
+| UI state | Zustand (`client/src/stores/useBundleStore.ts`) |
+| Server state | TanStack Query (`useCatalog`, `QueryProvider`) |
+| Styling | CSS Modules + design tokens (`client/src/styles/tokens.css`) |
+| Tests | Vitest + React Testing Library (co-located `*.test.ts(x)`) |
+| DB | Supabase (anon key + RLS read-only) |
+| Persistence | localStorage `wyze-bundle:v1` (versioned, try/catch) |
+
+## Architecture
+
+```
+Client → TanStack Query → Express GET /api/catalog → Supabase (or local fallback)
+Client → Zustand ↔ localStorage (save/restore bundle)
+```
+
+- **Express BFF** shapes DB rows into one `CatalogResponse`; never expose service role key.
+- **Supabase env optional**: missing `SUPABASE_URL`/`SUPABASE_ANON_KEY` → serve `server/src/data/catalog.json`.
+- **With Supabase**: fetch `steps`/`products`/`variants`, merge `server/src/data/app-config.json`.
+
+## Data split
+
+| In Supabase | In bundled JSON |
+|-------------|-----------------|
+| `steps`, `products`, `variants` | `app-config.json`: `activeStep`, `initialSelections`, `shipping`, `financing` |
+| | `catalog.json`: full offline API response |
+
+Types: `server/src/types/catalog.ts` — `CatalogResponse`, `AppConfig`, `SelectionKey`.
+
+## Selection model (critical)
+
+```ts
+type SelectionKey = `${productId}:${variantId | 'default'}`
+```
+
+- Each variant has its own quantity; stepper edits the **active** variant on the card.
+- Review panel shows every variant with qty > 0 as separate lines.
+- Builder and review steppers share one `setQuantity` in Zustand.
+- On hydrate: `reconcileSelections(saved, catalog)` drops stale keys against current catalog.
+
+## Key paths
+
+- `client/src/components/builder/` — Accordion, ProductCard, VariantSelector
+- `client/src/components/review/` — ReviewPanel, CheckoutSummary
+- `client/src/lib/pricing.ts` — totals, savings
+- `client/src/lib/storage.ts` — localStorage save/load
+- `server/src/routes/` — API routes (US-03+)
+- `supabase/migrations/` — run 001 then 002 on fresh DB
+
+## Conventions
+
+- Direct imports (no barrel `index.ts` files)
+- Fine-grained Zustand selectors to limit re-renders
+- `Intl.NumberFormat` for currency; `aria-*` + keyboard on interactive UI
+- Reference skills: `react-best-practices`, `web-design-guidelines`, `writing-tests`
+
+## Seed totals (must match)
+
+Compare-at $238.81 → $187.89 | Savings $50.92 | Financing $19.19/mo
+
+Initial: Cam v4 White ×1, Cam Pan v3 ×2, Motion Sensor ×2, Hub ×1 (FREE), MicroSD ×2, Cam Unlimited ×1.

@@ -1,0 +1,19 @@
+{
+  "activeStep": 1,
+  "shipping": {
+    "label": "Fast Shipping",
+    "compareAt": 5.99,
+    "price": 0
+  },
+  "financing": {
+    "monthlyLow": 19.19
+  },
+  "initialSelections": {
+    "cam-v4:cam-v4-white": 1,
+    "cam-pan-v3:default": 2,
+    "motion-sensor:default": 2,
+    "sense-hub:default": 1,
+    "microsd-256:default": 2,
+    "cam-unlimited:default": 1
+  }
+}
