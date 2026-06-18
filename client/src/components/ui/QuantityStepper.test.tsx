@@ -60,4 +60,15 @@ describe('QuantityStepper', () => {
     expect(screen.getByRole('button', { name: 'Decrease quantity' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Increase quantity' })).toBeInTheDocument()
   })
+
+  it('disables both controls when disabled', async () => {
+    const onChange = vi.fn()
+    render(<QuantityStepper value={1} onChange={onChange} disabled />)
+
+    expect(screen.getByRole('button', { name: 'Decrease quantity' })).toBeDisabled()
+    expect(screen.getByRole('button', { name: 'Increase quantity' })).toBeDisabled()
+
+    await user.click(screen.getByRole('button', { name: 'Increase quantity' }))
+    expect(onChange).not.toHaveBeenCalled()
+  })
 })

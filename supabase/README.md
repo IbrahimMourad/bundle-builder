@@ -51,8 +51,9 @@ Review-panel UI chrome (`satisfaction-badge.png`, `fast-shipping-icon.svg`) stay
 3. Upload files from the repo:
    - `client/public/assets/products/*` → `catalog-assets/products/`
    - `client/public/assets/steps/*` → `catalog-assets/steps/`
+   - `client/public/assets/variants/*` → `catalog-assets/variants/`
 
-**Dashboard:** Storage → `catalog-assets` → upload into `products/` and `steps/` folders.
+**Dashboard:** Storage → `catalog-assets` → upload into `products/`, `steps/`, and `variants/` folders.
 
 **CLI script (optional):** from the repo root, with `SUPABASE_SERVICE_ROLE_KEY` in `server/.env`:
 
@@ -79,6 +80,8 @@ The service role key is for local uploads only — never commit it.
 4. [`migrations/004_catalog_storage.sql`](migrations/004_catalog_storage.sql) — public `catalog-assets` storage bucket (no list policy)
 5. [`migrations/005_asset_storage_paths.sql`](migrations/005_asset_storage_paths.sql) — **upgrade only**: migrate existing `/assets/...` paths to storage keys
 6. [`migrations/006_drop_storage_list_policy.sql`](migrations/006_drop_storage_list_policy.sql) — **upgrade only**: drop list policy if you ran an older `004`
+7. [`migrations/007_variant_images.sql`](migrations/007_variant_images.sql) — **upgrade only**: Cam Pan v3 color variants + variant thumbnail paths
+8. [`migrations/008_cam_unlimited_svg.sql`](migrations/008_cam_unlimited_svg.sql) — **upgrade only**: Cam Unlimited product image path PNG → SVG
 
 ## Setup
 
@@ -98,7 +101,9 @@ If you previously ran an older schema where `id` was `text` (e.g. `cam-v4`), run
 
 If you already have UUID schema + seed but old `/assets/...` paths in the database, run **`005_asset_storage_paths.sql`**, then upload assets.
 
-### Fix storage list warning
+### Upgrading variant images
+
+If you already have UUID schema + seed but no Cam Pan v3 variants or variant thumbnails, run **`007_variant_images.sql`**, then re-upload assets (includes the new `variants/` folder).
 
 If Supabase shows *"Clients can list all files in this bucket"*, you applied an older `004` that included a broad `SELECT` policy on `storage.objects`. Run **`006_drop_storage_list_policy.sql`**. Public image URLs keep working — clients only need the paths returned by `/api/catalog`, not bucket listing.
 

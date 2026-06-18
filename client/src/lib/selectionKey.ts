@@ -1,4 +1,5 @@
 import type { CatalogProduct, SelectionKey } from '@/types/catalog'
+import { getDefaultVariantId } from '@/lib/variants'
 
 export function getSelectionKey(
   productId: string,
@@ -12,7 +13,7 @@ export function getActiveVariantId(
   selectedVariantByProduct: Record<string, string>,
 ): string | 'default' {
   if (product.variants.length === 0) return 'default'
-  return selectedVariantByProduct[product.id] ?? product.variants[0].id
+  return selectedVariantByProduct[product.id] ?? getDefaultVariantId(product)
 }
 
 export function getProductTotalQuantity(

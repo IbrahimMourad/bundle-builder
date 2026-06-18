@@ -10,7 +10,7 @@
   },
   "initialSelections": {
     "cam-v4:cam-v4-white": 1,
-    "cam-pan-v3:default": 2,
+    "cam-pan-v3:cam-pan-v3-white": 2,
     "motion-sensor:default": 2,
     "sense-hub:default": 1,
     "microsd-256:default": 2,

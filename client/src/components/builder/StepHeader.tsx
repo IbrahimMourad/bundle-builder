@@ -1,8 +1,10 @@
 import type { CatalogStep } from '@/types/catalog'
+import { StepHeaderChevronIcon } from './StepHeaderChevronIcon'
 import styles from './StepHeader.module.css'
 
 interface StepHeaderProps {
   step: CatalogStep
+  totalSteps: number
   isExpanded: boolean
   selectedCount: number
   onToggle: () => void
@@ -11,6 +13,7 @@ interface StepHeaderProps {
 
 export function StepHeader({
   step,
+  totalSteps,
   isExpanded,
   selectedCount,
   onToggle,
@@ -24,19 +27,27 @@ export function StepHeader({
       aria-controls={panelId}
       onClick={onToggle}
     >
-      <img className={styles.icon} src={step.icon} alt="" width={32} height={32} />
-      <div className={styles.meta}>
-        <span className={styles.label}>STEP {step.order} OF 4</span>
-        <span className={styles.title}>{step.title}</span>
-      </div>
-      <span className={styles.trailing}>
-        {isExpanded && selectedCount > 0 ? (
-          <span className={styles.selectedCount}>{selectedCount} selected</span>
-        ) : null}
-        <span className={styles.chevron} aria-hidden="true">
-          {isExpanded ? '▴' : '▾'}
+      <div className={styles.stepLabelRow}>
+        <span className={styles.label}>
+          STEP {step.order} OF {totalSteps}
         </span>
-      </span>
+      </div>
+
+      <div className={styles.titleRow}>
+        <img className={styles.icon} src={step.icon} alt="" width={32} height={32} />
+        <span className={styles.title}>{step.title}</span>
+        <span className={styles.trailing}>
+          {isExpanded && selectedCount > 0 ? (
+            <span className={styles.selectedCount}>{selectedCount} selected</span>
+          ) : null}
+          <span
+            className={`${styles.chevron} ${isExpanded ? '' : styles.chevronCollapsed}`}
+            aria-hidden="true"
+          >
+            <StepHeaderChevronIcon />
+          </span>
+        </span>
+      </div>
     </button>
   )
 }

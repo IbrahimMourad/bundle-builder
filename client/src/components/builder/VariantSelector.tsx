@@ -8,6 +8,27 @@ interface VariantSelectorProps {
   name: string
 }
 
+function VariantThumb({ variant }: { variant: CatalogVariant }) {
+  if (variant.imageUrl) {
+    return (
+      <img
+        className={styles.thumb}
+        src={variant.imageUrl}
+        alt=""
+        width={28}
+      />
+    )
+  }
+
+  return (
+    <span
+      className={styles.thumbFallback}
+      style={{ backgroundColor: variant.swatchColor ?? 'var(--color-border)' }}
+      aria-hidden="true"
+    />
+  )
+}
+
 export function VariantSelector({
   variants,
   selectedVariantId,
@@ -28,11 +49,7 @@ export function VariantSelector({
             className={isSelected ? styles.chipSelected : styles.chip}
             onClick={() => onSelect(variant.id)}
           >
-            <span
-              className={styles.swatch}
-              style={{ backgroundColor: variant.swatchColor ?? undefined }}
-              aria-hidden="true"
-            />
+            <VariantThumb variant={variant} />
             <span className={styles.label}>{variant.label}</span>
           </button>
         )

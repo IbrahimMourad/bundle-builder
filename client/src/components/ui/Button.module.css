@@ -32,9 +32,18 @@
 }
 
 .outline {
+  padding: var(--button-outline-padding-y) var(--button-outline-padding-x);
+  font-family: var(--button-outline-font-family);
+  font-size: var(--button-outline-font-size);
+  font-weight: var(--button-outline-font-weight);
+  line-height: var(--button-outline-line-height);
+  letter-spacing: 0;
+  text-align: center;
+  vertical-align: middle;
   color: var(--color-primary);
-  background: var(--color-surface);
-  border-color: var(--color-primary);
+  background: transparent;
+  border: var(--button-outline-border-width) solid var(--color-primary);
+  border-radius: var(--button-outline-radius);
 }
 
 .outline:hover:not(:disabled) {

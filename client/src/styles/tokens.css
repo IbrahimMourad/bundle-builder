@@ -9,8 +9,13 @@
   /* Surfaces */
   --color-page-bg: #f5f6f8;
   --color-surface: #ffffff;
-  --color-review-bg: #e8f4fc;
+  --color-review-bg: #edf4ff;
+  --color-accordion-expanded-bg: var(--color-review-bg);
   --color-surface-muted: #f9fafb;
+  --color-stepper-button-bg-card: #f0f4f7;
+  --color-stepper-button-bg-review: #ffffff;
+  --color-stepper-icon-plus: #525963;
+  --color-stepper-icon-minus: #ced6de;
 
   /* Text */
   --color-text: #1a1d26;
@@ -18,6 +23,9 @@
   --color-text-muted: #6b7280;
   --color-text-subtle: #9ca3af;
   --color-text-inverse: #ffffff;
+  --color-text-product: rgb(31 31 31 / 0.75);
+  --color-link: #0000ee;
+  --color-link-hover: #0000cc;
 
   /* Borders */
   --color-border: #e5e7eb;
@@ -31,8 +39,13 @@
   --color-badge-bg: #7c3aed;
   --color-badge-text: #ffffff;
   --color-compare: #9ca3af;
+  --color-price: #575757;
+  --color-price-compare: #d8392b;
   --color-free: #059669;
-  --color-savings: #059669;
+  --color-checkout-accent: #4e2fd2;
+  --color-savings: #0aa288;
+  --color-variant-selected-border: #10a89e;
+  --color-variant-selected-bg: #e8f7f6;
 
   /* Focus */
   --color-focus-ring: #6e3ce8;
@@ -42,6 +55,9 @@
   /* Typography — Gilroy matches Wyze design; Inter is the web-safe fallback */
   --font-family: 'Gilroy', 'Inter', system-ui, -apple-system, BlinkMacSystemFont,
     'Segoe UI', sans-serif;
+  --font-family-semibold: 'Gilroy-SemiBold', 'Gilroy', 'Inter', system-ui, sans-serif;
+  --font-family-regular-italic: 'Gilroy-RegularItalic', 'Gilroy', 'Inter', system-ui, sans-serif;
+  --font-size-2xs: 0.625rem; /* 10px */
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
@@ -56,11 +72,14 @@
   --font-weight-bold: 700;
 
   --line-height-tight: 1.25;
+  --line-height-none: 1;
+  --line-height-product: 1.3;
   --line-height-snug: 1.375;
   --line-height-normal: 1.5;
   --line-height-relaxed: 1.625;
 
   --letter-spacing-tight: -0.025em;
+  --letter-spacing-price: 0.0375rem; /* 0.6px */
   --letter-spacing-wide: 0.05em;
   --letter-spacing-wider: 0.1em;
 
@@ -69,10 +88,15 @@
   --space-2: 0.5rem;
   --space-3: 0.75rem;
   --space-4: 1rem;
+  --space-10: 0.625rem; /* 10px */
+  --space-11: 0.6875rem; /* 11px */
+  --space-15: 0.9375rem; /* 15px */
   --space-5: 1.25rem;
+  --space-19: 1.1875rem; /* 19px */
+  --space-20: 1.25rem; /* 20px */
   --space-6: 1.5rem;
   --space-8: 2rem;
-  --space-10: 2.5rem;
+  --space-40: 2.5rem;
   --space-12: 3rem;
   --space-16: 4rem;
 
@@ -110,11 +134,99 @@
   /* Component tokens */
   --step-label-size: var(--font-size-xs);
   --step-title-size: var(--font-size-xl);
+  --step-header-padding-x: var(--space-6);
+  --step-label-row-padding-y: var(--space-3);
+  --step-title-row-padding-y: var(--space-5);
+  --step-label-row-border-color: var(--color-border);
+  --step-selected-count-color: var(--color-checkout-accent);
   --section-heading-size: var(--font-size-sm);
   --card-radius: var(--radius-xl);
   --card-padding: var(--space-4);
+  --product-card-radius: var(--space-10);
+  --product-card-padding: var(--space-11);
+  --product-card-min-height: 10.8125rem; /* 173px */
+  --product-card-gap: var(--space-19);
+  --product-card-image-width: 6.3125rem; /* 101px */
+  --product-card-border-selected: var(--focus-ring-width);
+  --product-grid-gap: var(--space-4);
+  --product-grid-gap-md: var(--space-15);
+  --product-name-font-size: var(--font-size-base);
+  --product-name-font-weight: var(--font-weight-semibold);
+  --product-name-line-height: var(--line-height-none);
+  --product-name-letter-spacing: var(--letter-spacing-price);
+  --product-desc-font-size: var(--font-size-xs);
+  --product-desc-font-weight: var(--font-weight-medium);
+  --product-desc-line-height: var(--line-height-product);
+  --product-desc-letter-spacing: var(--letter-spacing-price);
+  --product-desc-color: var(--color-text-product);
+  --product-learn-more-color: var(--color-link);
+  --product-learn-more-color-hover: var(--color-link-hover);
+  --price-card-font-size: var(--font-size-base);
+  --price-card-font-weight: var(--font-weight-normal);
+  --price-card-line-height: var(--line-height-none);
+  --price-card-letter-spacing: var(--letter-spacing-price);
+  --price-card-color: var(--color-price);
+  --price-card-compare-color: var(--color-price-compare);
+  --price-review-color: var(--color-checkout-accent);
+  --price-review-free-color: var(--color-checkout-accent);
+  --price-review-compare-color: #6f7882;
+  --checkout-savings-font-family: var(--font-family-semibold);
+  --checkout-savings-font-weight: 400;
+  --checkout-savings-font-size: var(--font-size-xs); /* 12px */
+  --checkout-savings-line-height: var(--line-height-none);
+  --checkout-savings-letter-spacing: -0.06px;
+  --checkout-savings-color: var(--color-savings);
+  --checkout-button-radius: 4px;
+  --checkout-button-padding-y: 0.8125rem; /* 13px */
+  --checkout-button-padding-x: var(--space-4); /* 16px */
+  --checkout-save-link-font-family: var(--font-family-regular-italic);
+  --checkout-save-link-font-weight: 400;
+  --checkout-save-link-font-size: var(--font-size-sm); /* 14px */
+  --checkout-save-link-line-height: 1.2;
+  --checkout-save-link-letter-spacing: -0.02px;
+  --checkout-save-link-color: #484848;
+  --checkout-save-link-color-hover: #333333;
+  --checkout-shipping-icon-box-size: 2.5625rem; /* 41px */
+  --checkout-shipping-icon-box-radius: 5px;
+  --checkout-shipping-icon-size: 1.8125rem; /* 29px */
+  --review-divider-margin-top: var(--space-10); /* 10px */
+  --review-divider-margin-bottom: var(--space-15); /* 15px */
+  --review-divider-color: rgb(26 29 38 / 0.08);
+  --review-product-thumb-box-size: 2.5625rem; /* 41px */
+  --review-product-thumb-box-radius: 4px;
+  --review-intro-gap: 0.3125rem; /* 5px */
   --button-radius: var(--radius-full);
   --button-padding-y: var(--space-3);
   --button-padding-x: var(--space-6);
+  --button-outline-radius: 7px;
+  --button-outline-border-width: 1px;
+  --button-outline-padding-y: 5px;
+  --button-outline-padding-x: 24px;
+  --button-outline-font-family: var(--font-family-semibold);
+  --button-outline-font-weight: 400;
+  --button-outline-font-size: var(--font-size-lg); /* 18px */
+  --button-outline-line-height: 1.5rem; /* 24px */
   --chip-radius: var(--radius-md);
+  --variant-chip-min-width: 3.9375rem; /* 63px */
+  --variant-chip-height: 1.625rem; /* 26px */
+  --variant-chip-radius: 2px;
+  --variant-chip-border-width: 0.5px;
+  --variant-chip-padding-y: 1px;
+  --variant-chip-padding-x: 5px;
+  --variant-chip-inner-gap: 3px;
+  --variant-chip-border: var(--color-border);
+  --variant-chip-bg: var(--color-surface);
+  --variant-chip-border-selected: var(--color-variant-selected-border);
+  --variant-chip-bg-selected: var(--color-variant-selected-bg);
+  --variant-chip-label-color: var(--color-text);
+  --variant-label-font-size: var(--font-size-2xs);
+  --variant-label-font-weight: var(--font-weight-medium);
+  --variant-label-line-height: var(--line-height-none);
+  --variant-label-letter-spacing: var(--letter-spacing-price);
+  --variant-thumb-width: 1.75rem; /* 28px */
+  --stepper-button-size: 1.25rem; /* 20px */
+  --stepper-button-radius: 4px;
+  --stepper-icon-size: 0.5rem; /* 8px */
+  --stepper-button-bg-card: var(--color-stepper-button-bg-card);
+  --stepper-button-bg-review: var(--color-stepper-button-bg-review);
 }

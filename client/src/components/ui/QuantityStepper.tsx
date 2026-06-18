@@ -1,11 +1,16 @@
 import type { KeyboardEvent } from 'react'
+import { StepperMinusIcon, StepperPlusIcon } from './QuantityStepperIcons'
 import styles from './QuantityStepper.module.css'
+
+type QuantityStepperVariant = 'card' | 'review'
 
 interface QuantityStepperProps {
   value: number
   onChange: (value: number) => void
   min?: number
   label?: string
+  variant?: QuantityStepperVariant
+  disabled?: boolean
 }
 
 export function QuantityStepper({
@@ -13,18 +18,22 @@ export function QuantityStepper({
   onChange,
   min = 0,
   label = 'Quantity',
+  variant = 'card',
+  disabled = false,
 }: QuantityStepperProps) {
-  const decrementDisabled = value <= min
+  const decrementDisabled = disabled || value <= min
+  const incrementDisabled = disabled
 
   function decrement() {
     if (!decrementDisabled) onChange(value - 1)
   }
 
   function increment() {
-    onChange(value + 1)
+    if (!incrementDisabled) onChange(value + 1)
   }
 
   function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+    if (disabled) return
     if (event.key === 'ArrowDown' || event.key === '-') {
       event.preventDefault()
       decrement()
@@ -38,10 +47,11 @@ export function QuantityStepper({
 
   return (
     <div
-      className={styles.stepper}
+      className={`${styles.stepper} ${styles[variant]} ${disabled ? styles.disabled : ''}`}
       role="group"
       aria-label={label}
-      tabIndex={0}
+      aria-disabled={disabled || undefined}
+      tabIndex={disabled ? -1 : 0}
       onKeyDown={handleKeyDown}
     >
       <button
@@ -51,7 +61,9 @@ export function QuantityStepper({
         disabled={decrementDisabled}
         onClick={decrement}
       >
-        −
+        <span className={styles.icon}>
+          <StepperMinusIcon />
+        </span>
       </button>
       <span className={styles.value} aria-live="polite" aria-atomic="true">
         {value}
@@ -60,9 +72,12 @@ export function QuantityStepper({
         type="button"
         className={styles.button}
         aria-label="Increase quantity"
+        disabled={incrementDisabled}
         onClick={increment}
       >
-        +
+        <span className={styles.icon}>
+          <StepperPlusIcon />
+        </span>
       </button>
     </div>
   )

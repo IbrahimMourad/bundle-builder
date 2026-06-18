@@ -66,7 +66,7 @@
           "slug": "cam-v4-white",
           "label": "White",
           "swatchColor": "#F5F5F5",
-          "imageUrl": null,
+          "imageUrl": "/assets/variants/cam-v4-white.png",
           "sortOrder": 1
         },
         {
@@ -74,7 +74,7 @@
           "slug": "cam-v4-gray",
           "label": "Gray",
           "swatchColor": "#9CA3AF",
-          "imageUrl": null,
+          "imageUrl": "/assets/variants/cam-v4-gray.png",
           "sortOrder": 2
         },
         {
@@ -82,7 +82,7 @@
           "slug": "cam-v4-black",
           "label": "Black",
           "swatchColor": "#1F2937",
-          "imageUrl": null,
+          "imageUrl": "/assets/variants/cam-v4-black.png",
           "sortOrder": 3
         }
       ]
@@ -103,7 +103,24 @@
       "isRequired": false,
       "showInBuilder": true,
       "sortOrder": 2,
-      "variants": []
+      "variants": [
+        {
+          "id": "c0000001-0001-4000-8000-000000000004",
+          "slug": "cam-pan-v3-white",
+          "label": "White",
+          "swatchColor": "#F5F5F5",
+          "imageUrl": "/assets/variants/cam-pan-v3-white.png",
+          "sortOrder": 1
+        },
+        {
+          "id": "c0000001-0001-4000-8000-000000000005",
+          "slug": "cam-pan-v3-black",
+          "label": "Black",
+          "swatchColor": "#1F2937",
+          "imageUrl": "/assets/variants/cam-pan-v3-black.png",
+          "sortOrder": 2
+        }
+      ]
     },
     {
       "id": "b0000001-0001-4000-8000-000000000003",
@@ -165,7 +182,7 @@
       "stepId": "a0000001-0001-4000-8000-000000000002",
       "name": "Cam Unlimited",
       "description": "Unlimited cameras on one plan",
-      "imageUrl": "/assets/products/cam-unlimited.png",
+      "imageUrl": "/assets/products/cam-unlimited.svg",
       "compareAtPrice": 12.99,
       "price": 9.99,
       "badge": null,
@@ -234,7 +251,7 @@
   ],
   "initialSelections": {
     "b0000001-0001-4000-8000-000000000001:c0000001-0001-4000-8000-000000000001": 1,
-    "b0000001-0001-4000-8000-000000000002:default": 2,
+    "b0000001-0001-4000-8000-000000000002:c0000001-0001-4000-8000-000000000004": 2,
     "b0000001-0001-4000-8000-000000000007:default": 2,
     "b0000001-0001-4000-8000-000000000008:default": 1,
     "b0000001-0001-4000-8000-000000000009:default": 2,

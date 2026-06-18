@@ -47,7 +47,7 @@ async function uploadCatalogAssets(): Promise<void> {
   }
 
   const supabase = createClient(supabaseUrl, serviceRoleKey)
-  const folders = ['products', 'steps'] as const
+  const folders = ['products', 'steps', 'variants'] as const
 
   for (const folder of folders) {
     const localDir = join(assetsRoot, folder)

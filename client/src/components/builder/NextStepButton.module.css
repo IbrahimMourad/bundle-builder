@@ -1,5 +1,12 @@
 .button {
   display: block;
   max-width: 20rem;
+  margin-top: var(--product-grid-gap);
   margin-inline: auto;
+}
+
+@media (min-width: 48rem) {
+  .button {
+    margin-top: var(--product-grid-gap-md);
+  }
 }

@@ -1,5 +1,11 @@
 import { create } from 'zustand'
 import { reconcileSelections } from '@/lib/reconcileSelections'
+import {
+  buildRequiredSelectionKeys,
+  enforceRequiredQuantities,
+  isRequiredSelectionKey,
+} from '@/lib/requiredProducts'
+import { getDefaultVariant, normalizeVariantSelections } from '@/lib/variants'
 import { loadBundle, saveBundle, type SavedBundle } from '@/lib/storage'
 import type { CatalogResponse, SelectionKey } from '@/types/catalog'
 
@@ -8,6 +14,7 @@ interface BundleState {
   activeStep: number
   selectedVariantByProduct: Record<string, string>
   quantities: Record<SelectionKey, number>
+  requiredSelectionKeys: ReadonlySet<SelectionKey>
   isCheckoutOpen: boolean
 
   hydrateFromCatalog: (data: CatalogResponse) => void
@@ -26,6 +33,7 @@ const initialState = {
   activeStep: 1,
   selectedVariantByProduct: {},
   quantities: {},
+  requiredSelectionKeys: new Set<SelectionKey>(),
   isCheckoutOpen: false,
 }
 
@@ -43,7 +51,7 @@ function buildInitialVariantSelection(
     })
 
     selectedVariantByProduct[product.id] =
-      variantFromSelections?.id ?? product.variants[0].id
+      variantFromSelections?.id ?? getDefaultVariant(product)!.id
   }
 
   return selectedVariantByProduct
@@ -65,8 +73,12 @@ export const useBundleStore = create<BundleState>((set, get) => ({
     set({
       hasHydrated: true,
       activeStep: data.activeStep,
-      quantities: { ...data.initialSelections },
+      quantities: enforceRequiredQuantities(
+        normalizeVariantSelections({ ...data.initialSelections }, data),
+        data,
+      ),
       selectedVariantByProduct: buildInitialVariantSelection(data),
+      requiredSelectionKeys: buildRequiredSelectionKeys(data),
     })
   },
 
@@ -77,6 +89,7 @@ export const useBundleStore = create<BundleState>((set, get) => ({
       activeStep: saved.activeStep,
       quantities: reconciled.quantities,
       selectedVariantByProduct: reconciled.selectedVariantByProduct,
+      requiredSelectionKeys: buildRequiredSelectionKeys(catalog),
     })
   },
 
@@ -92,6 +105,10 @@ export const useBundleStore = create<BundleState>((set, get) => ({
 
   setQuantity: (key, qty) =>
     set((state) => {
+      if (isRequiredSelectionKey(key, state.requiredSelectionKeys)) {
+        return state
+      }
+
       const quantities = { ...state.quantities }
 
       if (qty <= 0) {

@@ -47,4 +47,31 @@ describe('ProductCard', () => {
     await user.click(screen.getByRole('button', { name: 'Increase quantity' }))
     expect(useBundleStore.getState().quantities['prod-cam-v4:var-white']).toBe(2)
   })
+
+  it('disables quantity changes for required products', async () => {
+    const requiredProduct = {
+      ...product,
+      id: 'prod-hub',
+      slug: 'sense-hub',
+      name: 'Wyze Sense Hub (Required)',
+      isRequired: true,
+      variants: [],
+      price: 0,
+      compareAtPrice: 27.99,
+      badge: 'FREE',
+    }
+
+    useBundleStore.setState({
+      quantities: { 'prod-hub:default': 1 },
+      requiredSelectionKeys: new Set(['prod-hub:default']),
+    })
+
+    render(<ProductCard product={requiredProduct} />)
+
+    expect(screen.getByRole('button', { name: 'Decrease quantity' })).toBeDisabled()
+    expect(screen.getByRole('button', { name: 'Increase quantity' })).toBeDisabled()
+
+    await user.click(screen.getByRole('button', { name: 'Increase quantity' }))
+    expect(useBundleStore.getState().quantities['prod-hub:default']).toBe(1)
+  })
 })

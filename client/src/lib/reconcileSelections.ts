@@ -1,4 +1,6 @@
 import type { CatalogProduct, CatalogResponse, SelectionKey } from '@/types/catalog'
+import { enforceRequiredQuantities } from '@/lib/requiredProducts'
+import { normalizeVariantSelections } from '@/lib/variants'
 
 export interface SavedSelectionState {
   quantities: Record<SelectionKey, number>
@@ -28,8 +30,9 @@ export function reconcileSelections(
 ): ReconciledSelectionState {
   const productById = new Map(catalog.products.map((product) => [product.id, product]))
   const quantities: Record<SelectionKey, number> = {}
+  const normalizedSavedQuantities = normalizeVariantSelections(saved.quantities, catalog)
 
-  for (const [key, qty] of Object.entries(saved.quantities)) {
+  for (const [key, qty] of Object.entries(normalizedSavedQuantities)) {
     if (qty <= 0) continue
 
     const productId = key.split(':')[0]
@@ -61,5 +64,8 @@ export function reconcileSelections(
       variantWithQty?.id ?? product.variants[0]?.id ?? savedVariant ?? ''
   }
 
-  return { quantities, selectedVariantByProduct }
+  return {
+    quantities: enforceRequiredQuantities(quantities, catalog),
+    selectedVariantByProduct,
+  }
 }

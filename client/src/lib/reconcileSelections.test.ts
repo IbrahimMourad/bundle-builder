@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import { reconcileSelections } from './reconcileSelections'
 import { mockCatalog } from '@/test/fixtures/mockCatalog'
+import seedCatalogJson from '@/test/fixtures/seedCatalog.json'
+import type { CatalogResponse } from '@/types/catalog'
 
 describe('reconcileSelections', () => {
   it('keeps valid selection keys', () => {
@@ -61,5 +63,34 @@ describe('reconcileSelections', () => {
     )
 
     expect(result.selectedVariantByProduct['prod-cam-v4']).toBe('var-white')
+  })
+
+  it('restores required products at quantity 1', () => {
+    const result = reconcileSelections(
+      {
+        quantities: {},
+        selectedVariantByProduct: {},
+      },
+      seedCatalogJson as CatalogResponse,
+    )
+
+    expect(result.quantities['b0000001-0001-4000-8000-000000000008:default']).toBe(1)
+  })
+
+  it('migrates legacy default variant keys to the white variant', () => {
+    const result = reconcileSelections(
+      {
+        quantities: {
+          'b0000001-0001-4000-8000-000000000002:default': 2,
+        },
+        selectedVariantByProduct: {},
+      },
+      seedCatalogJson as CatalogResponse,
+    )
+
+    expect(result.quantities['b0000001-0001-4000-8000-000000000002:default']).toBeUndefined()
+    expect(
+      result.quantities['b0000001-0001-4000-8000-000000000002:c0000001-0001-4000-8000-000000000004'],
+    ).toBe(2)
   })
 })

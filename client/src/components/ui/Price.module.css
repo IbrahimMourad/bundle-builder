@@ -1,6 +1,12 @@
 .price {
   display: inline-flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-1);
+}
+
+.lg {
+  flex-direction: row;
   align-items: baseline;
   gap: var(--space-2);
 }
@@ -55,4 +61,40 @@
   color: var(--color-free);
   font-weight: var(--font-weight-semibold);
   text-transform: uppercase;
+}
+
+.card {
+  text-align: right;
+  vertical-align: middle;
+}
+
+.card .current,
+.card .free,
+.card .compareAt {
+  font-family: var(--font-family);
+  font-weight: var(--price-card-font-weight);
+  font-size: var(--price-card-font-size);
+  line-height: var(--price-card-line-height);
+  letter-spacing: var(--price-card-letter-spacing);
+}
+
+.card .current {
+  color: var(--price-card-color);
+}
+
+.card .compareAt {
+  text-decoration: line-through;
+  color: var(--price-card-compare-color);
+}
+
+.review .current {
+  color: var(--price-review-color);
+}
+
+.review .free {
+  color: var(--price-review-free-color);
+}
+
+.review .compareAt {
+  color: var(--price-review-compare-color);
 }

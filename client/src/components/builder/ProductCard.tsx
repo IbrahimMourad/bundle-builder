@@ -55,16 +55,17 @@ export const ProductCard = memo(function ProductCard({ product }: ProductCardPro
           className={styles.image}
           src={product.imageUrl}
           alt={product.name}
-          width={120}
-          height={120}
+          width={101}
         />
 
         <div className={styles.content}>
           <h3 className={styles.name}>{product.name}</h3>
-          <p className={styles.description}>{product.description}</p>
-          <a className={styles.learnMore} href={product.learnMoreUrl}>
-            Learn More
-          </a>
+          <p className={styles.description}>
+            {product.description}{' '}
+            <a className={styles.learnMore} href={product.learnMoreUrl}>
+              Learn More
+            </a>
+          </p>
 
           {product.variants.length > 0 ? (
             <VariantSelector
@@ -80,12 +81,16 @@ export const ProductCard = memo(function ProductCard({ product }: ProductCardPro
               value={quantity}
               onChange={handleQuantityChange}
               label={`${product.name} quantity`}
+              variant="card"
+              disabled={product.isRequired}
+              min={product.isRequired ? 1 : 0}
             />
             <Price
               price={product.price}
               compareAt={product.compareAtPrice}
               suffix={product.priceLabel}
               size="sm"
+              variant="card"
             />
           </div>
         </div>

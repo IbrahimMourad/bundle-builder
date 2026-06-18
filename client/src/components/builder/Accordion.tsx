@@ -44,6 +44,7 @@ export function Accordion() {
           >
             <StepHeader
               step={step}
+              totalSteps={catalog.steps.length}
               isExpanded={isExpanded}
               selectedCount={selectedCountByStep[step.id] ?? 0}
               panelId={panelId}
