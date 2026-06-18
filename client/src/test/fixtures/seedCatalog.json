@@ -1,0 +1,243 @@
+{
+  "source": "local",
+  "activeStep": 1,
+  "shipping": {
+    "label": "Fast Shipping",
+    "compareAt": 5.99,
+    "price": 0
+  },
+  "financing": {
+    "monthlyLow": 19.19
+  },
+  "steps": [
+    {
+      "id": "a0000001-0001-4000-8000-000000000001",
+      "slug": "cameras",
+      "order": 1,
+      "title": "Choose your cameras",
+      "icon": "/assets/steps/cameras.svg",
+      "nextLabel": "Next: Choose your plan"
+    },
+    {
+      "id": "a0000001-0001-4000-8000-000000000002",
+      "slug": "plan",
+      "order": 2,
+      "title": "Choose your plan",
+      "icon": "/assets/steps/plan.svg",
+      "nextLabel": "Next: Choose your sensors"
+    },
+    {
+      "id": "a0000001-0001-4000-8000-000000000003",
+      "slug": "sensors",
+      "order": 3,
+      "title": "Choose your sensors",
+      "icon": "/assets/steps/sensors.svg",
+      "nextLabel": "Next: Add extra protection"
+    },
+    {
+      "id": "a0000001-0001-4000-8000-000000000004",
+      "slug": "protection",
+      "order": 4,
+      "title": "Add extra protection",
+      "icon": "/assets/steps/protection.svg",
+      "nextLabel": "Next: Review your system"
+    }
+  ],
+  "products": [
+    {
+      "id": "b0000001-0001-4000-8000-000000000001",
+      "slug": "cam-v4",
+      "stepId": "a0000001-0001-4000-8000-000000000001",
+      "name": "Wyze Cam v4",
+      "description": "720p HD video, now with a Siren",
+      "imageUrl": "/assets/products/cam-v4.png",
+      "compareAtPrice": 35.98,
+      "price": 27.98,
+      "badge": "Save 22%",
+      "category": "cameras",
+      "learnMoreUrl": "#",
+      "priceLabel": null,
+      "isRequired": false,
+      "showInBuilder": true,
+      "sortOrder": 1,
+      "variants": [
+        {
+          "id": "c0000001-0001-4000-8000-000000000001",
+          "slug": "cam-v4-white",
+          "label": "White",
+          "swatchColor": "#F5F5F5",
+          "imageUrl": null,
+          "sortOrder": 1
+        },
+        {
+          "id": "c0000001-0001-4000-8000-000000000002",
+          "slug": "cam-v4-gray",
+          "label": "Gray",
+          "swatchColor": "#9CA3AF",
+          "imageUrl": null,
+          "sortOrder": 2
+        },
+        {
+          "id": "c0000001-0001-4000-8000-000000000003",
+          "slug": "cam-v4-black",
+          "label": "Black",
+          "swatchColor": "#1F2937",
+          "imageUrl": null,
+          "sortOrder": 3
+        }
+      ]
+    },
+    {
+      "id": "b0000001-0001-4000-8000-000000000002",
+      "slug": "cam-pan-v3",
+      "stepId": "a0000001-0001-4000-8000-000000000001",
+      "name": "Wyze Cam Pan v3",
+      "description": "1080p HD video with 360° pan and 180° tilt",
+      "imageUrl": "/assets/products/cam-pan-v3.png",
+      "compareAtPrice": 28.99,
+      "price": 23.99,
+      "badge": "Save 17%",
+      "category": "cameras",
+      "learnMoreUrl": "#",
+      "priceLabel": null,
+      "isRequired": false,
+      "showInBuilder": true,
+      "sortOrder": 2,
+      "variants": []
+    },
+    {
+      "id": "b0000001-0001-4000-8000-000000000003",
+      "slug": "battery-cam-pro",
+      "stepId": "a0000001-0001-4000-8000-000000000001",
+      "name": "Wyze Battery Cam Pro",
+      "description": "100% battery-powered HD smart security camera",
+      "imageUrl": "/assets/products/battery-cam-pro.png",
+      "compareAtPrice": null,
+      "price": 89.99,
+      "badge": null,
+      "category": "cameras",
+      "learnMoreUrl": "#",
+      "priceLabel": null,
+      "isRequired": false,
+      "showInBuilder": true,
+      "sortOrder": 3,
+      "variants": []
+    },
+    {
+      "id": "b0000001-0001-4000-8000-000000000004",
+      "slug": "doorbell-v2",
+      "stepId": "a0000001-0001-4000-8000-000000000001",
+      "name": "Wyze Video Doorbell v2",
+      "description": "1080p HD video doorbell with two-way audio",
+      "imageUrl": "/assets/products/doorbell-v2.png",
+      "compareAtPrice": null,
+      "price": 44.98,
+      "badge": null,
+      "category": "cameras",
+      "learnMoreUrl": "#",
+      "priceLabel": null,
+      "isRequired": false,
+      "showInBuilder": true,
+      "sortOrder": 4,
+      "variants": []
+    },
+    {
+      "id": "b0000001-0001-4000-8000-000000000005",
+      "slug": "duo-cam-doorbell",
+      "stepId": "a0000001-0001-4000-8000-000000000001",
+      "name": "Wyze Duo Cam Doorbell",
+      "description": "Dual cameras for full porch and package coverage",
+      "imageUrl": "/assets/products/duo-cam-doorbell.png",
+      "compareAtPrice": null,
+      "price": 99.98,
+      "badge": null,
+      "category": "cameras",
+      "learnMoreUrl": "#",
+      "priceLabel": null,
+      "isRequired": false,
+      "showInBuilder": true,
+      "sortOrder": 5,
+      "variants": []
+    },
+    {
+      "id": "b0000001-0001-4000-8000-000000000006",
+      "slug": "cam-unlimited",
+      "stepId": "a0000001-0001-4000-8000-000000000002",
+      "name": "Cam Unlimited",
+      "description": "Unlimited cameras on one plan",
+      "imageUrl": "/assets/products/cam-unlimited.png",
+      "compareAtPrice": 12.99,
+      "price": 9.99,
+      "badge": null,
+      "category": "plan",
+      "learnMoreUrl": "#",
+      "priceLabel": "/mo",
+      "isRequired": false,
+      "showInBuilder": true,
+      "sortOrder": 1,
+      "variants": []
+    },
+    {
+      "id": "b0000001-0001-4000-8000-000000000007",
+      "slug": "motion-sensor",
+      "stepId": "a0000001-0001-4000-8000-000000000003",
+      "name": "Wyze Sense Motion Sensor",
+      "description": "Detect motion and get alerts on your phone",
+      "imageUrl": "/assets/products/motion-sensor.png",
+      "compareAtPrice": null,
+      "price": 29.99,
+      "badge": null,
+      "category": "sensors",
+      "learnMoreUrl": "#",
+      "priceLabel": null,
+      "isRequired": false,
+      "showInBuilder": true,
+      "sortOrder": 1,
+      "variants": []
+    },
+    {
+      "id": "b0000001-0001-4000-8000-000000000008",
+      "slug": "sense-hub",
+      "stepId": "a0000001-0001-4000-8000-000000000003",
+      "name": "Wyze Sense Hub (Required)",
+      "description": "Required hub for Wyze Sense sensors",
+      "imageUrl": "/assets/products/sense-hub.png",
+      "compareAtPrice": 29.92,
+      "price": 0,
+      "badge": null,
+      "category": "sensors",
+      "learnMoreUrl": "#",
+      "priceLabel": null,
+      "isRequired": true,
+      "showInBuilder": false,
+      "sortOrder": 2,
+      "variants": []
+    },
+    {
+      "id": "b0000001-0001-4000-8000-000000000009",
+      "slug": "microsd-256",
+      "stepId": "a0000001-0001-4000-8000-000000000004",
+      "name": "Wyze MicroSD Card (256GB)",
+      "description": "Local storage for continuous recording",
+      "imageUrl": "/assets/products/microsd-256.png",
+      "compareAtPrice": null,
+      "price": 20.98,
+      "badge": null,
+      "category": "accessories",
+      "learnMoreUrl": "#",
+      "priceLabel": null,
+      "isRequired": false,
+      "showInBuilder": true,
+      "sortOrder": 1,
+      "variants": []
+    }
+  ],
+  "initialSelections": {
+    "b0000001-0001-4000-8000-000000000001:c0000001-0001-4000-8000-000000000001": 1,
+    "b0000001-0001-4000-8000-000000000002:default": 2,
+    "b0000001-0001-4000-8000-000000000007:default": 2,
+    "b0000001-0001-4000-8000-000000000008:default": 1,
+    "b0000001-0001-4000-8000-000000000009:default": 2,
+    "b0000001-0001-4000-8000-000000000006:default": 1
+  }
+}

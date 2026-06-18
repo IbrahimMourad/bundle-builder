@@ -1,5 +1,7 @@
 import { useCatalog } from '@/hooks/useCatalog'
-import type { ProductCategory, SelectionKey } from '@/types/catalog'
+import { useBundleStore } from '@/stores/useBundleStore'
+import { selectReviewLineItems, selectTotals } from '@/stores/bundleSelectors'
+import type { ProductCategory } from '@/types/catalog'
 import styles from './ReviewShell.module.css'
 
 const CATEGORY_HEADINGS: Record<ProductCategory, string> = {
@@ -16,10 +18,21 @@ const CATEGORY_ORDER: ProductCategory[] = [
   'plan',
 ]
 
+function formatCurrency(value: number): string {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  }).format(value)
+}
+
 export function ReviewShell() {
   const { data: catalog, isPending, isError } = useCatalog()
+  const hasHydrated = useBundleStore((state) => state.hasHydrated)
+  const quantities = useBundleStore((state) => state.quantities)
+  const saveToStorage = useBundleStore((state) => state.saveToStorage)
+  const openCheckout = useBundleStore((state) => state.openCheckout)
 
-  if (isPending) {
+  if (isPending || !hasHydrated) {
     return <p className={styles.status}>Loading review…</p>
   }
 
@@ -27,16 +40,12 @@ export function ReviewShell() {
     return <p className={styles.status}>Could not load review.</p>
   }
 
-  const reviewProducts = catalog.products.filter((product) => {
-    const keys = Object.keys(catalog.initialSelections) as SelectionKey[]
-    return keys.some(
-      (key) => key.startsWith(`${product.id}:`) && (catalog.initialSelections[key] ?? 0) > 0,
-    )
-  })
+  const lineItems = selectReviewLineItems({ quantities }, catalog)
+  const totals = selectTotals({ quantities }, catalog)
 
   const sections = CATEGORY_ORDER.map((category) => ({
     heading: CATEGORY_HEADINGS[category],
-    items: reviewProducts.filter((product) => product.category === category),
+    items: lineItems.filter((item) => item.category === category),
   })).filter((section) => section.items.length > 0)
 
   return (
@@ -52,15 +61,19 @@ export function ReviewShell() {
             <h3 className={styles.sectionHeading}>{section.heading}</h3>
             <ul className={styles.itemList}>
               {section.items.map((item) => (
-                <li key={item.id} className={styles.item}>
+                <li key={item.key} className={styles.item}>
                   <img
                     className={styles.itemThumb}
-                    src={item.imageUrl}
+                    src={item.product.imageUrl}
                     alt=""
                     width={40}
                     height={40}
                   />
-                  <span className={styles.itemName}>{item.name}</span>
+                  <span className={styles.itemName}>
+                    {item.product.name}
+                    {item.variant ? ` (${item.variant.label})` : ''}
+                    {item.quantity > 1 ? ` ×${item.quantity}` : ''}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -76,21 +89,24 @@ export function ReviewShell() {
 
         <div className={styles.totals} aria-live="polite">
           <p className={styles.financing}>
-            as low as ${catalog.financing.monthlyLow.toFixed(2)}/mo
+            as low as {formatCurrency(totals.financingMonthly)}/mo
           </p>
           <p className={styles.totalRow}>
-            <span className={styles.compareAt}>$238.81</span>
-            <span className={styles.total}>$187.89</span>
+            <span className={styles.compareAt}>{formatCurrency(totals.compareAt)}</span>
+            <span className={styles.total}>{formatCurrency(totals.total)}</span>
           </p>
-          <p className={styles.savings}>
-            Congrats! You&apos;re saving $50.92 on your security bundle!
-          </p>
+          {totals.savings > 0 ? (
+            <p className={styles.savings}>
+              Congrats! You&apos;re saving {formatCurrency(totals.savings)} on your security
+              bundle!
+            </p>
+          ) : null}
         </div>
 
-        <button type="button" className={styles.checkoutButton}>
+        <button type="button" className={styles.checkoutButton} onClick={openCheckout}>
           Checkout
         </button>
-        <button type="button" className={styles.saveLink}>
+        <button type="button" className={styles.saveLink} onClick={saveToStorage}>
           Save my system for later
         </button>
       </div>

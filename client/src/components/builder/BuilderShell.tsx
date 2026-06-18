@@ -1,10 +1,16 @@
 import { useCatalog } from '@/hooks/useCatalog'
+import { useBundleStore } from '@/stores/useBundleStore'
+import { selectDistinctSelectedCountPerStep } from '@/stores/bundleSelectors'
 import styles from './BuilderShell.module.css'
 
 export function BuilderShell() {
   const { data: catalog, isPending, isError } = useCatalog()
+  const hasHydrated = useBundleStore((state) => state.hasHydrated)
+  const activeStep = useBundleStore((state) => state.activeStep)
+  const quantities = useBundleStore((state) => state.quantities)
+  const setActiveStep = useBundleStore((state) => state.setActiveStep)
 
-  if (isPending) {
+  if (isPending || !hasHydrated) {
     return <p className={styles.status}>Loading catalog…</p>
   }
 
@@ -12,15 +18,17 @@ export function BuilderShell() {
     return <p className={styles.status}>Could not load catalog.</p>
   }
 
-  const activeStep = catalog.steps.find((step) => step.order === catalog.activeStep)
+  const selectedCountByStep = selectDistinctSelectedCountPerStep({ quantities }, catalog)
+  const expandedStep = catalog.steps.find((step) => step.order === activeStep)
 
   return (
     <div className={styles.shell}>
       {catalog.steps.map((step) => {
-        const isExpanded = step.order === catalog.activeStep
+        const isExpanded = step.order === activeStep
         const stepProducts = catalog.products.filter(
           (product) => product.stepId === step.id && product.showInBuilder,
         )
+        const selectedCount = selectedCountByStep[step.id] ?? 0
 
         return (
           <article
@@ -39,15 +47,13 @@ export function BuilderShell() {
                 <span className={styles.stepLabel}>STEP {step.order} OF 4</span>
                 <h2 className={styles.stepTitle}>{step.title}</h2>
               </div>
-              {isExpanded ? (
-                <span className={styles.selectedCount}>
-                  {stepProducts.length > 0 ? `${stepProducts.length} shown` : ''}
-                </span>
-              ) : (
+              {isExpanded && selectedCount > 0 ? (
+                <span className={styles.selectedCount}>{selectedCount} selected</span>
+              ) : !isExpanded ? (
                 <span className={styles.chevron} aria-hidden="true">
                   ▾
                 </span>
-              )}
+              ) : null}
             </header>
 
             {isExpanded ? (
@@ -66,9 +72,18 @@ export function BuilderShell() {
                     </figure>
                   ))}
                 </div>
-                {activeStep ? (
-                  <button type="button" className={styles.nextButton}>
-                    {activeStep.nextLabel}
+                {expandedStep ? (
+                  <button
+                    type="button"
+                    className={styles.nextButton}
+                    onClick={() => {
+                      const nextStep = catalog.steps.find(
+                        (entry) => entry.order === activeStep + 1,
+                      )
+                      if (nextStep) setActiveStep(nextStep.order)
+                    }}
+                  >
+                    {expandedStep.nextLabel}
                   </button>
                 ) : null}
               </div>
