@@ -16,11 +16,13 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  height: -webkit-fill-available;
 }
 
 body {
   min-width: 320px;
   min-height: 100vh;
+  min-height: var(--min-viewport-height);
   font-family: var(--font-family);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-normal);
@@ -35,6 +37,7 @@ body {
 
 #root {
   min-height: 100vh;
+  min-height: var(--min-viewport-height);
 }
 
 img,

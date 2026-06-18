@@ -121,6 +121,7 @@
   --layout-gap: var(--space-6);
   --layout-sticky-top: var(--space-6);
   --layout-page-padding: var(--space-6);
+  --min-viewport-height: 100vh;
   --review-panel-padding-y: var(--space-15);
   --review-panel-padding-x: var(--space-20);
   --accordion-panel-padding-x: var(--space-15);
@@ -253,5 +254,20 @@
     --product-card-image-width: 5rem;
     --product-grid-gap: var(--space-3);
     --product-grid-gap-md: var(--space-4);
+  }
+}
+
+/* iOS Safari: prefer dynamic viewport units, fall back to -webkit-fill-available */
+@supports (min-height: 100dvh) {
+  :root {
+    --min-viewport-height: 100dvh;
+  }
+}
+
+@supports not (min-height: 100dvh) {
+  @supports (-webkit-touch-callout: none) {
+    :root {
+      --min-viewport-height: -webkit-fill-available;
+    }
   }
 }
