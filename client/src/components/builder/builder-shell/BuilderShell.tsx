@@ -1,4 +1,4 @@
-import { Accordion } from './Accordion'
+import { Accordion } from '../accordion/Accordion'
 import styles from './BuilderShell.module.css'
 
 export function BuilderShell() {

@@ -1,4 +1,4 @@
-import { Shimmer } from '@/components/ui/Shimmer'
+import { Shimmer } from '@/components/ui/shimmer/Shimmer'
 import styles from './AccordionShimmer.module.css'
 
 const STEP_COUNT = 4

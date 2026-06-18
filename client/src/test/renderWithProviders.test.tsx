@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { mockCatalog } from '@/test/fixtures/mockCatalog'
 import { createTestQueryClient, renderWithProviders } from '@/test/renderWithProviders'
 import { useBundleStore } from '@/stores/useBundleStore'
-import { Accordion } from '@/components/builder/Accordion'
+import { Accordion } from '@/components/builder/accordion/Accordion'
 
 describe('renderWithProviders', () => {
   it('seeds the catalog query and hydrates the bundle store by default', () => {

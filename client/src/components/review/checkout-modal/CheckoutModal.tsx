@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { Button } from '@/components/ui/Button'
+import { Button } from '@/components/ui/button/Button'
 import { useBundleStore } from '@/stores/useBundleStore'
 import styles from './CheckoutModal.module.css'
 

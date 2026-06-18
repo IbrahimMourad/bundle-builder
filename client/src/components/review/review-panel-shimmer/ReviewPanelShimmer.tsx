@@ -1,4 +1,4 @@
-import { Shimmer } from '@/components/ui/Shimmer'
+import { Shimmer } from '@/components/ui/shimmer/Shimmer'
 import styles from './ReviewPanelShimmer.module.css'
 
 function ReviewLineItemShimmer() {

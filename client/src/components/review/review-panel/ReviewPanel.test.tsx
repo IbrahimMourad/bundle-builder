@@ -1,10 +1,10 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { SaveToast } from '@/components/ui/SaveToast'
+import { SaveToast } from '@/components/ui/save-toast/SaveToast'
 import { useBundleStore } from '@/stores/useBundleStore'
 import { renderWithProviders } from '@/test/renderWithProviders'
-import { CheckoutModal } from './CheckoutModal'
+import { CheckoutModal } from '../checkout-modal/CheckoutModal'
 import { ReviewPanel } from './ReviewPanel'
 
 describe('ReviewPanel', () => {

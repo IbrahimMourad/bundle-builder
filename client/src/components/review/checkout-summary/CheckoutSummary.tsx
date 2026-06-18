@@ -1,10 +1,10 @@
-import { Button } from '@/components/ui/Button'
-import { Price } from '@/components/ui/Price'
+import { Button } from '@/components/ui/button/Button'
+import { Price } from '@/components/ui/price/Price'
 import { formatCurrency } from '@/lib/formatCurrency'
 import type { BundleTotals } from '@/lib/pricing'
 import { useBundleStore } from '@/stores/useBundleStore'
 import type { CatalogResponse } from '@/types/catalog'
-import { ReviewDivider } from './ReviewDivider'
+import { ReviewDivider } from '../review-divider/ReviewDivider'
 import styles from './CheckoutSummary.module.css'
 
 interface CheckoutSummaryProps {
