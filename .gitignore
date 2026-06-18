@@ -5,7 +5,9 @@ dist
 *.log
 .DS_Store
 coverage
-.cursor
+.cursor/*
+!.cursor/rules/
+!.cursor/rules/**
 task
 .tmp
 .DS_Store
