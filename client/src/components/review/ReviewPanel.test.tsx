@@ -1,30 +1,21 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { useCatalog } from '@/hooks/useCatalog'
-import { mockCatalog } from '@/test/fixtures/mockCatalog'
+import { SaveToast } from '@/components/ui/SaveToast'
 import { useBundleStore } from '@/stores/useBundleStore'
+import { renderWithProviders } from '@/test/renderWithProviders'
 import { CheckoutModal } from './CheckoutModal'
 import { ReviewPanel } from './ReviewPanel'
-
-vi.mock('@/hooks/useCatalog')
 
 describe('ReviewPanel', () => {
   const user = userEvent.setup()
 
   beforeEach(() => {
-    useBundleStore.getState().reset()
-    useBundleStore.getState().hydrateFromCatalog(mockCatalog)
-
-    vi.mocked(useCatalog).mockReturnValue({
-      data: mockCatalog,
-      isPending: false,
-      isError: false,
-    } as ReturnType<typeof useCatalog>)
+    vi.restoreAllMocks()
   })
 
   it('renders grouped line items from store selections', () => {
-    render(<ReviewPanel />)
+    renderWithProviders(<ReviewPanel />)
 
     expect(screen.getByRole('heading', { name: 'Your security system' })).toBeInTheDocument()
     expect(
@@ -38,7 +29,7 @@ describe('ReviewPanel', () => {
   })
 
   it('updates totals when review stepper changes quantity', async () => {
-    render(<ReviewPanel />)
+    renderWithProviders(<ReviewPanel />)
 
     const steppers = screen.getAllByRole('button', { name: 'Increase quantity' })
     await user.click(steppers[0])
@@ -48,14 +39,14 @@ describe('ReviewPanel', () => {
   })
 
   it('syncs review stepper changes back to the shared store', async () => {
-    render(<ReviewPanel />)
+    renderWithProviders(<ReviewPanel />)
 
     await user.click(screen.getAllByRole('button', { name: 'Decrease quantity' })[0])
     expect(useBundleStore.getState().quantities['prod-cam-v4:var-white']).toBeUndefined()
   })
 
   it('opens checkout modal when Checkout is clicked', async () => {
-    render(
+    renderWithProviders(
       <>
         <ReviewPanel />
         <CheckoutModal />
@@ -65,5 +56,25 @@ describe('ReviewPanel', () => {
     await user.click(screen.getByRole('button', { name: 'Checkout' }))
     expect(useBundleStore.getState().isCheckoutOpen).toBe(true)
     expect(screen.getByRole('dialog', { name: /ready to checkout/i })).toBeInTheDocument()
+  })
+})
+
+describe('ReviewPanel save flow', () => {
+  const user = userEvent.setup()
+
+  beforeEach(() => {
+    vi.restoreAllMocks()
+  })
+
+  it('shows system saved toast when save link is clicked', async () => {
+    renderWithProviders(
+      <>
+        <ReviewPanel />
+        <SaveToast />
+      </>,
+    )
+
+    await user.click(screen.getByRole('button', { name: 'Save my system for later' }))
+    expect(screen.getByRole('status')).toHaveTextContent('System saved')
   })
 })
