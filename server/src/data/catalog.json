@@ -15,7 +15,7 @@
       "slug": "cameras",
       "order": 1,
       "title": "Choose your cameras",
-      "icon": "camera",
+      "icon": "/assets/steps/cameras.svg",
       "nextLabel": "Next: Choose your plan"
     },
     {
@@ -23,7 +23,7 @@
       "slug": "plan",
       "order": 2,
       "title": "Choose your plan",
-      "icon": "shield",
+      "icon": "/assets/steps/plan.svg",
       "nextLabel": "Next: Choose your sensors"
     },
     {
@@ -31,7 +31,7 @@
       "slug": "sensors",
       "order": 3,
       "title": "Choose your sensors",
-      "icon": "sensor",
+      "icon": "/assets/steps/sensors.svg",
       "nextLabel": "Next: Add extra protection"
     },
     {
@@ -39,7 +39,7 @@
       "slug": "protection",
       "order": 4,
       "title": "Add extra protection",
-      "icon": "grid",
+      "icon": "/assets/steps/protection.svg",
       "nextLabel": "Next: Review your system"
     }
   ],
