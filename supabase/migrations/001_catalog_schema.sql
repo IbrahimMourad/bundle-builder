@@ -1,8 +1,10 @@
 -- US-02: Catalog schema (steps, products, variants only)
 -- App config (initial selections, shipping, financing) lives in server/src/data/app-config.json
+-- IDs are UUIDs; slugs are stable human-readable keys for config and debugging.
 
 create table if not exists public.steps (
-  id text primary key,
+  id uuid primary key default gen_random_uuid(),
+  slug text not null unique,
   step_order integer not null unique,
   title text not null,
   icon text not null,
@@ -10,8 +12,9 @@ create table if not exists public.steps (
 );
 
 create table if not exists public.products (
-  id text primary key,
-  step_id text not null references public.steps (id) on delete restrict,
+  id uuid primary key default gen_random_uuid(),
+  slug text not null unique,
+  step_id uuid not null references public.steps (id) on delete restrict,
   name text not null,
   description text not null,
   image_url text not null,
@@ -27,8 +30,9 @@ create table if not exists public.products (
 );
 
 create table if not exists public.variants (
-  id text primary key,
-  product_id text not null references public.products (id) on delete cascade,
+  id uuid primary key default gen_random_uuid(),
+  slug text not null unique,
+  product_id uuid not null references public.products (id) on delete cascade,
   label text not null,
   swatch_color text,
   image_url text,

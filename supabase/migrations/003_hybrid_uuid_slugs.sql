@@ -1,6 +1,63 @@
--- US-02: Seed catalog data matching design screenshots
--- Totals: compare-at $238.81 → $187.89, savings $50.92, financing $19.19/mo
--- Fixed UUIDs keep FK references stable across environments.
+-- Upgrade: replace text PKs with UUID PKs + slug columns (destructive — catalog only)
+-- Run this if you already applied an older 001/002 with text ids.
+-- Safe to skip on a fresh database — use 001 + 002 instead.
+
+drop table if exists public.variants;
+drop table if exists public.products;
+drop table if exists public.steps;
+
+create table public.steps (
+  id uuid primary key default gen_random_uuid(),
+  slug text not null unique,
+  step_order integer not null unique,
+  title text not null,
+  icon text not null,
+  next_label text not null
+);
+
+create table public.products (
+  id uuid primary key default gen_random_uuid(),
+  slug text not null unique,
+  step_id uuid not null references public.steps (id) on delete restrict,
+  name text not null,
+  description text not null,
+  image_url text not null,
+  compare_at_price numeric(10, 2),
+  price numeric(10, 2) not null,
+  badge text,
+  category text not null check (category in ('cameras', 'sensors', 'accessories', 'plan')),
+  learn_more_url text not null default '#',
+  price_label text,
+  is_required boolean not null default false,
+  show_in_builder boolean not null default true,
+  sort_order integer not null default 0
+);
+
+create table public.variants (
+  id uuid primary key default gen_random_uuid(),
+  slug text not null unique,
+  product_id uuid not null references public.products (id) on delete cascade,
+  label text not null,
+  swatch_color text,
+  image_url text,
+  sort_order integer not null default 0
+);
+
+create index products_step_id_idx on public.products (step_id);
+create index variants_product_id_idx on public.variants (product_id);
+
+alter table public.steps enable row level security;
+alter table public.products enable row level security;
+alter table public.variants enable row level security;
+
+create policy "steps_read_anon"
+  on public.steps for select to anon, authenticated using (true);
+
+create policy "products_read_anon"
+  on public.products for select to anon, authenticated using (true);
+
+create policy "variants_read_anon"
+  on public.variants for select to anon, authenticated using (true);
 
 insert into public.steps (id, slug, step_order, title, icon, next_label) values
   ('a0000001-0001-4000-8000-000000000001', 'cameras', 1, 'Choose your cameras', 'camera', 'Next: Choose your plan'),

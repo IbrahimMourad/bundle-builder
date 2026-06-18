@@ -11,28 +11,32 @@
   },
   "steps": [
     {
-      "id": "cameras",
+      "id": "a0000001-0001-4000-8000-000000000001",
+      "slug": "cameras",
       "order": 1,
       "title": "Choose your cameras",
       "icon": "camera",
       "nextLabel": "Next: Choose your plan"
     },
     {
-      "id": "plan",
+      "id": "a0000001-0001-4000-8000-000000000002",
+      "slug": "plan",
       "order": 2,
       "title": "Choose your plan",
       "icon": "shield",
       "nextLabel": "Next: Choose your sensors"
     },
     {
-      "id": "sensors",
+      "id": "a0000001-0001-4000-8000-000000000003",
+      "slug": "sensors",
       "order": 3,
       "title": "Choose your sensors",
       "icon": "sensor",
       "nextLabel": "Next: Add extra protection"
     },
     {
-      "id": "protection",
+      "id": "a0000001-0001-4000-8000-000000000004",
+      "slug": "protection",
       "order": 4,
       "title": "Add extra protection",
       "icon": "grid",
@@ -41,8 +45,9 @@
   ],
   "products": [
     {
-      "id": "cam-v4",
-      "stepId": "cameras",
+      "id": "b0000001-0001-4000-8000-000000000001",
+      "slug": "cam-v4",
+      "stepId": "a0000001-0001-4000-8000-000000000001",
       "name": "Wyze Cam v4",
       "description": "720p HD video, now with a Siren",
       "imageUrl": "/assets/products/cam-v4.png",
@@ -57,21 +62,24 @@
       "sortOrder": 1,
       "variants": [
         {
-          "id": "cam-v4-white",
+          "id": "c0000001-0001-4000-8000-000000000001",
+          "slug": "cam-v4-white",
           "label": "White",
           "swatchColor": "#F5F5F5",
           "imageUrl": null,
           "sortOrder": 1
         },
         {
-          "id": "cam-v4-gray",
+          "id": "c0000001-0001-4000-8000-000000000002",
+          "slug": "cam-v4-gray",
           "label": "Gray",
           "swatchColor": "#9CA3AF",
           "imageUrl": null,
           "sortOrder": 2
         },
         {
-          "id": "cam-v4-black",
+          "id": "c0000001-0001-4000-8000-000000000003",
+          "slug": "cam-v4-black",
           "label": "Black",
           "swatchColor": "#1F2937",
           "imageUrl": null,
@@ -80,8 +88,9 @@
       ]
     },
     {
-      "id": "cam-pan-v3",
-      "stepId": "cameras",
+      "id": "b0000001-0001-4000-8000-000000000002",
+      "slug": "cam-pan-v3",
+      "stepId": "a0000001-0001-4000-8000-000000000001",
       "name": "Wyze Cam Pan v3",
       "description": "1080p HD video with 360° pan and 180° tilt",
       "imageUrl": "/assets/products/cam-pan-v3.png",
@@ -97,8 +106,9 @@
       "variants": []
     },
     {
-      "id": "battery-cam-pro",
-      "stepId": "cameras",
+      "id": "b0000001-0001-4000-8000-000000000003",
+      "slug": "battery-cam-pro",
+      "stepId": "a0000001-0001-4000-8000-000000000001",
       "name": "Wyze Battery Cam Pro",
       "description": "100% battery-powered HD smart security camera",
       "imageUrl": "/assets/products/battery-cam-pro.png",
@@ -114,8 +124,9 @@
       "variants": []
     },
     {
-      "id": "doorbell-v2",
-      "stepId": "cameras",
+      "id": "b0000001-0001-4000-8000-000000000004",
+      "slug": "doorbell-v2",
+      "stepId": "a0000001-0001-4000-8000-000000000001",
       "name": "Wyze Video Doorbell v2",
       "description": "1080p HD video doorbell with two-way audio",
       "imageUrl": "/assets/products/doorbell-v2.png",
@@ -131,8 +142,9 @@
       "variants": []
     },
     {
-      "id": "duo-cam-doorbell",
-      "stepId": "cameras",
+      "id": "b0000001-0001-4000-8000-000000000005",
+      "slug": "duo-cam-doorbell",
+      "stepId": "a0000001-0001-4000-8000-000000000001",
       "name": "Wyze Duo Cam Doorbell",
       "description": "Dual cameras for full porch and package coverage",
       "imageUrl": "/assets/products/duo-cam-doorbell.png",
@@ -148,8 +160,9 @@
       "variants": []
     },
     {
-      "id": "cam-unlimited",
-      "stepId": "plan",
+      "id": "b0000001-0001-4000-8000-000000000006",
+      "slug": "cam-unlimited",
+      "stepId": "a0000001-0001-4000-8000-000000000002",
       "name": "Cam Unlimited",
       "description": "Unlimited cameras on one plan",
       "imageUrl": "/assets/products/cam-unlimited.png",
@@ -165,8 +178,9 @@
       "variants": []
     },
     {
-      "id": "motion-sensor",
-      "stepId": "sensors",
+      "id": "b0000001-0001-4000-8000-000000000007",
+      "slug": "motion-sensor",
+      "stepId": "a0000001-0001-4000-8000-000000000003",
       "name": "Wyze Sense Motion Sensor",
       "description": "Detect motion and get alerts on your phone",
       "imageUrl": "/assets/products/motion-sensor.png",
@@ -182,8 +196,9 @@
       "variants": []
     },
     {
-      "id": "sense-hub",
-      "stepId": "sensors",
+      "id": "b0000001-0001-4000-8000-000000000008",
+      "slug": "sense-hub",
+      "stepId": "a0000001-0001-4000-8000-000000000003",
       "name": "Wyze Sense Hub (Required)",
       "description": "Required hub for Wyze Sense sensors",
       "imageUrl": "/assets/products/sense-hub.png",
@@ -199,8 +214,9 @@
       "variants": []
     },
     {
-      "id": "microsd-256",
-      "stepId": "protection",
+      "id": "b0000001-0001-4000-8000-000000000009",
+      "slug": "microsd-256",
+      "stepId": "a0000001-0001-4000-8000-000000000004",
       "name": "Wyze MicroSD Card (256GB)",
       "description": "Local storage for continuous recording",
       "imageUrl": "/assets/products/microsd-256.png",
@@ -217,11 +233,11 @@
     }
   ],
   "initialSelections": {
-    "cam-v4:cam-v4-white": 1,
-    "cam-pan-v3:default": 2,
-    "motion-sensor:default": 2,
-    "sense-hub:default": 1,
-    "microsd-256:default": 2,
-    "cam-unlimited:default": 1
+    "b0000001-0001-4000-8000-000000000001:c0000001-0001-4000-8000-000000000001": 1,
+    "b0000001-0001-4000-8000-000000000002:default": 2,
+    "b0000001-0001-4000-8000-000000000007:default": 2,
+    "b0000001-0001-4000-8000-000000000008:default": 1,
+    "b0000001-0001-4000-8000-000000000009:default": 2,
+    "b0000001-0001-4000-8000-000000000006:default": 1
   }
 }
