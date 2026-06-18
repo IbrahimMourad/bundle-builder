@@ -41,11 +41,14 @@
 .title {
   flex: 1;
   min-width: 0;
+  overflow: hidden;
   font-size: var(--step-title-size);
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-tight);
   letter-spacing: var(--letter-spacing-tight);
   color: var(--color-text);
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .trailing {
@@ -76,4 +79,17 @@
 
 .chevronIcon {
   display: block;
+}
+
+@media (max-width: 63.9375rem) {
+  .stepLabelRow {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-top: 1px solid var(--step-label-row-border-color);
+    border-bottom: 1px solid var(--step-label-row-border-color);
+  }
+
+  .stepLabelRowFirst {
+    border-top: none;
+  }
 }

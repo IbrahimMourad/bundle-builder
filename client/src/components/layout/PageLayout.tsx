@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { REVIEW_PANEL_ID } from '@/lib/layout'
 import styles from './PageLayout.module.css'
 
 interface PageLayoutProps {
@@ -13,7 +14,7 @@ export function PageLayout({ builder, review }: PageLayoutProps) {
         <section className={styles.builder} aria-label="Bundle builder">
           {builder}
         </section>
-        <aside className={styles.review} aria-label="Review panel">
+        <aside id={REVIEW_PANEL_ID} className={styles.review} aria-label="Review panel">
           {review}
         </aside>
       </div>

@@ -1,4 +1,5 @@
 import { useCatalog } from '@/hooks/useCatalog'
+import { isMobileLayout, scrollToReviewPanel } from '@/lib/layout'
 import { useBundleStore } from '@/stores/useBundleStore'
 import { selectDistinctSelectedCountPerStep } from '@/stores/bundleSelectors'
 import { NextStepButton } from './NextStepButton'
@@ -24,6 +25,15 @@ export function Accordion() {
   const selectedCountByStep = selectDistinctSelectedCountPerStep({ quantities }, catalog)
 
   function goToNextStep(currentOrder: number) {
+    const totalSteps = catalog!.steps.length
+    const isLastStep = currentOrder === totalSteps
+
+    if (isLastStep && isMobileLayout()) {
+      setActiveStep(0)
+      scrollToReviewPanel()
+      return
+    }
+
     const nextStep = catalog!.steps.find((step) => step.order === currentOrder + 1)
     if (nextStep) setActiveStep(nextStep.order)
   }
@@ -46,6 +56,7 @@ export function Accordion() {
               step={step}
               totalSteps={catalog.steps.length}
               isExpanded={isExpanded}
+              isFirstStep={step.order === 1}
               selectedCount={selectedCountByStep[step.id] ?? 0}
               panelId={panelId}
               onToggle={() => setActiveStep(step.order)}
@@ -54,7 +65,11 @@ export function Accordion() {
             {isExpanded ? (
               <div id={panelId} className={styles.panel}>
                 <ProductGrid products={stepProducts} />
-                <NextStepButton label={step.nextLabel} onClick={() => goToNextStep(step.order)} />
+                <NextStepButton
+                  label={step.nextLabel}
+                  onClick={() => goToNextStep(step.order)}
+                  hideOnDesktop={step.order === catalog.steps.length}
+                />
               </div>
             ) : null}
           </section>

@@ -93,18 +93,14 @@
   margin-top: auto;
 }
 
-@media (max-width: 48rem) {
-  .layout {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
+.actionsPlan {
+  justify-content: flex-end;
+}
 
-  .content {
-    align-items: center;
-  }
-
+@media (max-width: 63.9375rem) {
   .actions {
-    justify-content: center;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-2);
   }
 }

@@ -1,4 +1,22 @@
 .shell {
   display: flex;
   flex-direction: column;
+  gap: 0;
+}
+
+.title {
+  margin: 0;
+  padding: 31px 21px 20px 21px;
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-text);
+  text-align: center;
+}
+
+@media (min-width: 64rem) {
+  .title {
+    display: none;
+  }
 }

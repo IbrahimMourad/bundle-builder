@@ -5,8 +5,21 @@
   margin-inline: auto;
 }
 
+@media (max-width: 47.9375rem) {
+  .button {
+    max-width: none;
+    width: 100%;
+  }
+}
+
 @media (min-width: 48rem) {
   .button {
     margin-top: var(--product-grid-gap-md);
+  }
+}
+
+@media (min-width: 64rem) {
+  .hideOnDesktop {
+    display: none;
   }
 }

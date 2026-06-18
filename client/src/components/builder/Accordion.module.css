@@ -22,11 +22,38 @@
 }
 
 .panel {
-  padding: 0 var(--space-15) var(--space-15);
+  padding: 0 var(--accordion-panel-padding-x) var(--accordion-panel-padding-bottom);
 }
 
 .status {
   padding: var(--space-6);
   color: var(--color-text-muted);
   text-align: center;
+}
+
+@media (max-width: 63.9375rem) {
+  .accordion {
+    gap: 0;
+    overflow: hidden;
+    background: var(--color-surface);
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .stepExpanded,
+  .stepCollapsed {
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+  }
+
+  .stepExpanded:last-child,
+  .stepCollapsed:last-child {
+    border-bottom: none;
+  }
+
+  .stepExpanded .panel {
+    background: var(--color-accordion-expanded-bg);
+  }
 }

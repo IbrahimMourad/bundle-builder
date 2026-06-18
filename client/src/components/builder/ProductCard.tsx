@@ -42,6 +42,8 @@ export const ProductCard = memo(function ProductCard({ product }: ProductCardPro
     [product.id, setSelectedVariant],
   )
 
+  const isPlan = product.category === 'plan'
+
   return (
     <article className={selected ? styles.cardSelected : styles.card}>
       {product.badge ? (
@@ -76,15 +78,17 @@ export const ProductCard = memo(function ProductCard({ product }: ProductCardPro
             />
           ) : null}
 
-          <div className={styles.actions}>
-            <QuantityStepper
-              value={quantity}
-              onChange={handleQuantityChange}
-              label={`${product.name} quantity`}
-              variant="card"
-              disabled={product.isRequired}
-              min={product.isRequired ? 1 : 0}
-            />
+          <div className={isPlan ? `${styles.actions} ${styles.actionsPlan}` : styles.actions}>
+            {!isPlan ? (
+              <QuantityStepper
+                value={quantity}
+                onChange={handleQuantityChange}
+                label={`${product.name} quantity`}
+                variant="card"
+                disabled={product.isRequired}
+                min={product.isRequired ? 1 : 0}
+              />
+            ) : null}
             <Price
               price={product.price}
               compareAt={product.compareAtPrice}

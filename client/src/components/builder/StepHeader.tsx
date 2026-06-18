@@ -6,6 +6,7 @@ interface StepHeaderProps {
   step: CatalogStep
   totalSteps: number
   isExpanded: boolean
+  isFirstStep?: boolean
   selectedCount: number
   onToggle: () => void
   panelId: string
@@ -15,6 +16,7 @@ export function StepHeader({
   step,
   totalSteps,
   isExpanded,
+  isFirstStep = false,
   selectedCount,
   onToggle,
   panelId,
@@ -27,7 +29,13 @@ export function StepHeader({
       aria-controls={panelId}
       onClick={onToggle}
     >
-      <div className={styles.stepLabelRow}>
+      <div
+        className={
+          isFirstStep
+            ? `${styles.stepLabelRow} ${styles.stepLabelRowFirst}`
+            : styles.stepLabelRow
+        }
+      >
         <span className={styles.label}>
           STEP {step.order} OF {totalSteps}
         </span>
@@ -37,7 +45,7 @@ export function StepHeader({
         <img className={styles.icon} src={step.icon} alt="" width={32} height={32} />
         <span className={styles.title}>{step.title}</span>
         <span className={styles.trailing}>
-          {isExpanded && selectedCount > 0 ? (
+          {selectedCount > 0 ? (
             <span className={styles.selectedCount}>{selectedCount} selected</span>
           ) : null}
           <span

@@ -19,9 +19,15 @@
   min-width: 0;
 }
 
+@media (max-width: 63.9375rem) {
+  .page {
+    padding: 0;
+  }
+}
+
 @media (min-width: 64rem) {
   .container {
-    grid-template-columns: 1fr var(--layout-review-width);
+    grid-template-columns: minmax(0, 1fr) var(--layout-review-width);
     align-items: start;
   }
 
