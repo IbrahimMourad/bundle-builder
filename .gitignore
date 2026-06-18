@@ -12,3 +12,4 @@ coverage
 task
 .tmp
 .DS_Store
+.vercel
