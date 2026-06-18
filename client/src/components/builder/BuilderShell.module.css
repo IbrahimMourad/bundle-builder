@@ -114,22 +114,6 @@
 
 .nextButton {
   display: block;
-  width: 100%;
   max-width: 20rem;
   margin-inline: auto;
-  padding: var(--button-padding-y) var(--button-padding-x);
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-inverse);
-  background: var(--color-primary);
-  border-radius: var(--button-radius);
-  transition: background-color var(--transition-fast);
-}
-
-.nextButton:hover {
-  background: var(--color-primary-hover);
-}
-
-.nextButton:active {
-  background: var(--color-primary-active);
 }

@@ -1,4 +1,5 @@
 import { useCatalog } from '@/hooks/useCatalog'
+import { Button } from '@/components/ui/Button'
 import { useBundleStore } from '@/stores/useBundleStore'
 import { selectDistinctSelectedCountPerStep } from '@/stores/bundleSelectors'
 import styles from './BuilderShell.module.css'
@@ -73,8 +74,8 @@ export function BuilderShell() {
                   ))}
                 </div>
                 {expandedStep ? (
-                  <button
-                    type="button"
+                  <Button
+                    variant="outline"
                     className={styles.nextButton}
                     onClick={() => {
                       const nextStep = catalog.steps.find(
@@ -84,7 +85,7 @@ export function BuilderShell() {
                     }}
                   >
                     {expandedStep.nextLabel}
-                  </button>
+                  </Button>
                 ) : null}
               </div>
             ) : null}

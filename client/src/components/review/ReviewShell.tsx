@@ -1,4 +1,7 @@
 import { useCatalog } from '@/hooks/useCatalog'
+import { Button } from '@/components/ui/Button'
+import { Price } from '@/components/ui/Price'
+import { formatCurrency } from '@/lib/formatCurrency'
 import { useBundleStore } from '@/stores/useBundleStore'
 import { selectReviewLineItems, selectTotals } from '@/stores/bundleSelectors'
 import type { ProductCategory } from '@/types/catalog'
@@ -17,13 +20,6 @@ const CATEGORY_ORDER: ProductCategory[] = [
   'accessories',
   'plan',
 ]
-
-function formatCurrency(value: number): string {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  }).format(value)
-}
 
 export function ReviewShell() {
   const { data: catalog, isPending, isError } = useCatalog()
@@ -92,8 +88,7 @@ export function ReviewShell() {
             as low as {formatCurrency(totals.financingMonthly)}/mo
           </p>
           <p className={styles.totalRow}>
-            <span className={styles.compareAt}>{formatCurrency(totals.compareAt)}</span>
-            <span className={styles.total}>{formatCurrency(totals.total)}</span>
+            <Price price={totals.total} compareAt={totals.compareAt} size="lg" />
           </p>
           {totals.savings > 0 ? (
             <p className={styles.savings}>
@@ -103,9 +98,9 @@ export function ReviewShell() {
           ) : null}
         </div>
 
-        <button type="button" className={styles.checkoutButton} onClick={openCheckout}>
+        <Button variant="primary" fullWidth onClick={openCheckout}>
           Checkout
-        </button>
+        </Button>
         <button type="button" className={styles.saveLink} onClick={saveToStorage}>
           Save my system for later
         </button>

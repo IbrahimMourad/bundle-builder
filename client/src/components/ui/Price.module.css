@@ -1,0 +1,58 @@
+.price {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.sm .compareAt {
+  font-size: var(--font-size-sm);
+}
+
+.sm .current,
+.sm .free {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.md .compareAt {
+  font-size: var(--font-size-base);
+}
+
+.md .current,
+.md .free {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+.lg .compareAt {
+  font-size: var(--font-size-lg);
+}
+
+.lg .current {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.lg .free {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+.compareAt {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-compare);
+  text-decoration: line-through;
+}
+
+.current {
+  color: var(--color-text);
+}
+
+.free {
+  color: var(--color-free);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+}
