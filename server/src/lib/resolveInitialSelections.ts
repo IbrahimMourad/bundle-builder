@@ -1,5 +1,17 @@
 import type { CatalogProduct, SelectionKey } from '../types/catalog.js'
 
+function getDefaultVariant(product: CatalogProduct) {
+  if (product.variants.length === 0) return null
+
+  return (
+    product.variants.find(
+      (variant) => variant.slug.endsWith('-white') || variant.label.toLowerCase() === 'white',
+    ) ??
+    product.variants.find((variant) => variant.sortOrder === 1) ??
+    product.variants[0]
+  )
+}
+
 export function resolveInitialSelections(
   products: CatalogProduct[],
   slugSelections: Record<string, number>,
@@ -17,6 +29,11 @@ export function resolveInitialSelections(
       const variant = product.variants.find((item) => item.slug === variantSlug)
       if (!variant) continue
       variantId = variant.id
+    } else {
+      const defaultVariant = getDefaultVariant(product)
+      if (defaultVariant) {
+        variantId = defaultVariant.id
+      }
     }
 
     resolved[`${product.id}:${variantId}` as SelectionKey] = quantity

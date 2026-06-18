@@ -1,0 +1,110 @@
+.card,
+.cardSelected {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: var(--product-card-min-height);
+  padding: var(--product-card-padding);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--product-card-radius);
+  box-shadow: var(--shadow-card);
+}
+
+.cardSelected {
+  border-width: var(--product-card-border-selected);
+  border-color: var(--color-border-selected);
+  box-shadow: none;
+}
+
+.badgeWrap {
+  position: absolute;
+  top: var(--product-card-padding);
+  left: var(--product-card-padding);
+  z-index: 1;
+}
+
+.layout {
+  display: flex;
+  gap: var(--product-card-gap);
+  align-items: center;
+}
+
+.image {
+  flex-shrink: 0;
+  width: var(--product-card-image-width);
+  height: auto;
+  object-fit: contain;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.name {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--product-name-font-size);
+  font-weight: var(--product-name-font-weight);
+  line-height: var(--product-name-line-height);
+  letter-spacing: var(--product-name-letter-spacing);
+  color: var(--color-text);
+  vertical-align: middle;
+}
+
+.description {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--product-desc-font-size);
+  font-weight: var(--product-desc-font-weight);
+  line-height: var(--product-desc-line-height);
+  letter-spacing: var(--product-desc-letter-spacing);
+  color: var(--product-desc-color);
+  vertical-align: middle;
+}
+
+.learnMore {
+  font-family: var(--font-family);
+  font-size: var(--product-desc-font-size);
+  font-weight: var(--product-desc-font-weight);
+  line-height: var(--product-desc-line-height);
+  letter-spacing: var(--product-desc-letter-spacing);
+  color: var(--product-learn-more-color);
+  text-decoration: underline;
+  text-decoration-skip-ink: auto;
+  vertical-align: middle;
+}
+
+.learnMore:hover {
+  color: var(--product-learn-more-color-hover);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: auto;
+}
+
+@media (max-width: 48rem) {
+  .layout {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .content {
+    align-items: center;
+  }
+
+  .actions {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,5 @@
+.divider {
+  margin: var(--review-divider-margin-top) 0 var(--review-divider-margin-bottom);
+  border: none;
+  border-top: 1px solid var(--review-divider-color);
+}

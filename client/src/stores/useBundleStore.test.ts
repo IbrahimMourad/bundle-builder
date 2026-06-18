@@ -1,6 +1,10 @@
 import { beforeEach, describe, expect, it } from 'vitest'
+import seedCatalogJson from '@/test/fixtures/seedCatalog.json'
 import { mockCatalog } from '@/test/fixtures/mockCatalog'
+import type { CatalogResponse } from '@/types/catalog'
 import { useBundleStore } from './useBundleStore'
+
+const seedCatalog = seedCatalogJson as CatalogResponse
 
 describe('useBundleStore', () => {
   beforeEach(() => {
@@ -46,5 +50,17 @@ describe('useBundleStore', () => {
   it('updates active step', () => {
     useBundleStore.getState().setActiveStep(3)
     expect(useBundleStore.getState().activeStep).toBe(3)
+  })
+
+  it('keeps required products at quantity 1', () => {
+    useBundleStore.getState().hydrateFromCatalog(seedCatalog)
+
+    const requiredKey = 'b0000001-0001-4000-8000-000000000008:default'
+    expect(useBundleStore.getState().quantities[requiredKey]).toBe(1)
+
+    useBundleStore.getState().setQuantity(requiredKey, 0)
+    useBundleStore.getState().setQuantity(requiredKey, 3)
+
+    expect(useBundleStore.getState().quantities[requiredKey]).toBe(1)
   })
 })

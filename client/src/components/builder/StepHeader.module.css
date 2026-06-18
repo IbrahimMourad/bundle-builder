@@ -1,0 +1,79 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
+  text-align: left;
+  background: transparent;
+  border: none;
+}
+
+.stepLabelRow {
+  width: 100%;
+  padding: var(--step-label-row-padding-y) var(--step-header-padding-x);
+  border-bottom: 1px solid var(--step-label-row-border-color);
+}
+
+.label {
+  display: block;
+  font-size: var(--step-label-size);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-wider);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+  padding: var(--step-title-row-padding-y) var(--step-header-padding-x);
+}
+
+.icon {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  object-fit: contain;
+}
+
+.title {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--step-title-size);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-text);
+}
+
+.trailing {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.selectedCount {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--step-selected-count-color);
+}
+
+.chevron {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  color: var(--step-selected-count-color);
+  transition: transform var(--transition-fast);
+}
+
+.chevronCollapsed {
+  transform: rotate(180deg);
+}
+
+.chevronIcon {
+  display: block;
+}

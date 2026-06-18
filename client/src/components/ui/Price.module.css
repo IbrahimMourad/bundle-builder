@@ -1,0 +1,100 @@
+.price {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-1);
+}
+
+.lg {
+  flex-direction: row;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.sm .compareAt {
+  font-size: var(--font-size-sm);
+}
+
+.sm .current,
+.sm .free {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.md .compareAt {
+  font-size: var(--font-size-base);
+}
+
+.md .current,
+.md .free {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+.lg .compareAt {
+  font-size: var(--font-size-lg);
+}
+
+.lg .current {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.lg .free {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+.compareAt {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-compare);
+  text-decoration: line-through;
+}
+
+.current {
+  color: var(--color-text);
+}
+
+.free {
+  color: var(--color-free);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+}
+
+.card {
+  text-align: right;
+  vertical-align: middle;
+}
+
+.card .current,
+.card .free,
+.card .compareAt {
+  font-family: var(--font-family);
+  font-weight: var(--price-card-font-weight);
+  font-size: var(--price-card-font-size);
+  line-height: var(--price-card-line-height);
+  letter-spacing: var(--price-card-letter-spacing);
+}
+
+.card .current {
+  color: var(--price-card-color);
+}
+
+.card .compareAt {
+  text-decoration: line-through;
+  color: var(--price-card-compare-color);
+}
+
+.review .current {
+  color: var(--price-review-color);
+}
+
+.review .free {
+  color: var(--price-review-free-color);
+}
+
+.review .compareAt {
+  color: var(--price-review-compare-color);
+}

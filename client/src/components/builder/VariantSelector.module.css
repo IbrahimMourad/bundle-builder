@@ -1,0 +1,62 @@
+.group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.chip,
+.chipSelected {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--variant-chip-inner-gap);
+  width: auto;
+  min-width: var(--variant-chip-min-width);
+  height: var(--variant-chip-height);
+  flex-shrink: 0;
+  padding: var(--variant-chip-padding-y) var(--variant-chip-padding-x);
+  color: var(--variant-chip-label-color);
+  background: var(--variant-chip-bg);
+  border: var(--variant-chip-border-width) solid var(--variant-chip-border);
+  border-radius: var(--variant-chip-radius);
+  transition:
+    border-color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.chipSelected {
+  border-color: var(--variant-chip-border-selected);
+  background: var(--variant-chip-bg-selected);
+}
+
+.thumb,
+.thumbFallback {
+  flex-shrink: 0;
+  width: var(--variant-thumb-width);
+  height: auto;
+  max-height: 100%;
+}
+
+.thumb {
+  display: block;
+  object-fit: contain;
+}
+
+.thumbFallback {
+  display: block;
+  min-height: 1rem;
+  border-radius: var(--variant-chip-radius);
+}
+
+.label {
+  flex-shrink: 0;
+  font-family: var(--font-family);
+  font-size: var(--variant-label-font-size);
+  font-weight: var(--variant-label-font-weight);
+  line-height: var(--variant-label-line-height);
+  letter-spacing: var(--variant-label-letter-spacing);
+  color: var(--variant-chip-label-color);
+  white-space: nowrap;
+  vertical-align: middle;
+}

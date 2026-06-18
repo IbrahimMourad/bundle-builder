@@ -109,7 +109,7 @@ insert into public.products (
     'b0000001-0001-4000-8000-000000000006', 'cam-unlimited',
     'a0000001-0001-4000-8000-000000000002', 'Cam Unlimited',
     'Unlimited cameras on one plan',
-    'products/cam-unlimited.png',
+    'products/cam-unlimited.svg',
     12.99, 9.99, null, 'plan', '#', '/mo', false, true, 1
   ),
   (
@@ -135,6 +135,8 @@ insert into public.products (
   );
 
 insert into public.variants (id, slug, product_id, label, swatch_color, image_url, sort_order) values
-  ('c0000001-0001-4000-8000-000000000001', 'cam-v4-white', 'b0000001-0001-4000-8000-000000000001', 'White', '#F5F5F5', null, 1),
-  ('c0000001-0001-4000-8000-000000000002', 'cam-v4-gray', 'b0000001-0001-4000-8000-000000000001', 'Gray', '#9CA3AF', null, 2),
-  ('c0000001-0001-4000-8000-000000000003', 'cam-v4-black', 'b0000001-0001-4000-8000-000000000001', 'Black', '#1F2937', null, 3);
+  ('c0000001-0001-4000-8000-000000000001', 'cam-v4-white', 'b0000001-0001-4000-8000-000000000001', 'White', '#F5F5F5', 'variants/cam-v4-white.png', 1),
+  ('c0000001-0001-4000-8000-000000000002', 'cam-v4-gray', 'b0000001-0001-4000-8000-000000000001', 'Gray', '#9CA3AF', 'variants/cam-v4-gray.png', 2),
+  ('c0000001-0001-4000-8000-000000000003', 'cam-v4-black', 'b0000001-0001-4000-8000-000000000001', 'Black', '#1F2937', 'variants/cam-v4-black.png', 3),
+  ('c0000001-0001-4000-8000-000000000004', 'cam-pan-v3-white', 'b0000001-0001-4000-8000-000000000002', 'White', '#F5F5F5', 'variants/cam-pan-v3-white.png', 1),
+  ('c0000001-0001-4000-8000-000000000005', 'cam-pan-v3-black', 'b0000001-0001-4000-8000-000000000002', 'Black', '#1F2937', 'variants/cam-pan-v3-black.png', 2);
