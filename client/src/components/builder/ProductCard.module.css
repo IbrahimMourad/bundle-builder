@@ -1,0 +1,94 @@
+.card,
+.cardSelected {
+  position: relative;
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow-card);
+}
+
+.cardSelected {
+  border-color: var(--color-border-selected);
+  box-shadow: 0 0 0 1px var(--color-border-selected);
+}
+
+.badgeWrap {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  z-index: 1;
+}
+
+.layout {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+}
+
+.image {
+  flex-shrink: 0;
+  width: 7.5rem;
+  height: 7.5rem;
+  object-fit: contain;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.name {
+  margin: 0;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text);
+}
+
+.description {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-muted);
+}
+
+.learnMore {
+  align-self: flex-start;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.learnMore:hover {
+  text-decoration: underline;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: auto;
+}
+
+@media (max-width: 48rem) {
+  .layout {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .content {
+    align-items: center;
+  }
+
+  .actions {
+    justify-content: center;
+  }
+}

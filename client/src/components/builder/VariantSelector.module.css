@@ -1,0 +1,38 @@
+.group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.chip,
+.chipSelected {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--chip-radius);
+  transition:
+    border-color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.chipSelected {
+  border-color: var(--color-border-selected);
+  background: var(--color-primary-light);
+}
+
+.swatch {
+  width: 0.875rem;
+  height: 0.875rem;
+  border: 1px solid rgb(26 29 38 / 0.12);
+  border-radius: var(--radius-full);
+}
+
+.label {
+  line-height: 1;
+}

@@ -1,0 +1,60 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+  padding: var(--space-5) var(--space-6);
+  text-align: left;
+  background: transparent;
+  border: none;
+}
+
+.icon {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  object-fit: contain;
+}
+
+.meta {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.label {
+  font-size: var(--step-label-size);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-wider);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: var(--step-title-size);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-text);
+}
+
+.trailing {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.selectedCount {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+.chevron {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-muted);
+  line-height: 1;
+}
