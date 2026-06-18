@@ -44,21 +44,32 @@ Client → Zustand ↔ localStorage (save/restore bundle)
 
 - **Express BFF** shapes DB rows into one `CatalogResponse`; never expose service role key.
 - **Supabase env optional**: missing `SUPABASE_URL`/`SUPABASE_ANON_KEY` → serve `server/src/data/catalog.json`.
-- **With Supabase**: fetch `steps`/`products`/`variants`, merge `server/src/data/app-config.json`.
+- **With Supabase**: fetch `steps`/`products`/`variants`, merge `app-config.json`, resolve slug selections to UUIDs.
 
 ## Data split
 
 | In Supabase | In bundled JSON |
 |-------------|-----------------|
-| `steps`, `products`, `variants` | `app-config.json`: `activeStep`, `initialSelections`, `shipping`, `financing` |
-| | `catalog.json`: full offline API response |
+| `steps`, `products`, `variants` (UUID `id` + `slug`) | `app-config.json`: `activeStep`, slug-based `initialSelections`, `shipping`, `financing` |
+| | `catalog.json`: full offline API response (UUID ids + slugs) |
 
-Types: `server/src/types/catalog.ts` — `CatalogResponse`, `AppConfig`, `SelectionKey`.
+Types: `server/src/types/catalog.ts` — `CatalogResponse`, `AppConfig`, `SelectionKey`, `SlugSelectionKey`.
+
+## Identity model (hybrid)
+
+- **Database**: `id uuid` primary key; `slug text unique` for readable keys (`cam-v4`, `cameras`, …).
+- **API**: expose both `id` (UUID) and `slug` on steps, products, and variants; `stepId` on products is a step UUID.
+- **app-config.json**: `initialSelections` use slug keys (`cam-v4:cam-v4-white`); server resolves to UUID keys before responding.
+- **Client / localStorage**: selection keys use UUIDs (`productUuid:variantUuid` or `productUuid:default`).
 
 ## Selection model (critical)
 
 ```ts
-type SelectionKey = `${productId}:${variantId | 'default'}`
+// API / client / localStorage
+type SelectionKey = `${productUuid}:${variantUuid | 'default'}`
+
+// app-config.json only
+type SlugSelectionKey = `${productSlug}:${variantSlug | 'default'}`
 ```
 
 - Each variant has its own quantity; stepper edits the **active** variant on the card.
@@ -72,8 +83,12 @@ type SelectionKey = `${productId}:${variantId | 'default'}`
 - `client/src/components/review/` — ReviewPanel, CheckoutSummary
 - `client/src/lib/pricing.ts` — totals, savings
 - `client/src/lib/storage.ts` — localStorage save/load
-- `server/src/routes/` — API routes (US-03+)
-- `supabase/migrations/` — run 001 then 002 on fresh DB
+- `server/src/routes/catalog.ts` — `GET /api/catalog`
+- `server/src/services/catalogService.ts` — Supabase + local fallback
+- `server/src/lib/resolveInitialSelections.ts` — slug → UUID selection keys
+- `supabase/migrations/` — 001 schema + 002 seed on fresh DB; 003 to upgrade from text ids
+
+Full agent context: `.cursor/context.md`
 
 ## Conventions
 

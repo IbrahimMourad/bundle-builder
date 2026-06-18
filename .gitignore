@@ -8,6 +8,7 @@ coverage
 .cursor/*
 !.cursor/rules/
 !.cursor/rules/**
+!.cursor/context.md
 task
 .tmp
 .DS_Store

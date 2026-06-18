@@ -4,6 +4,7 @@ export type ProductCategory = 'cameras' | 'sensors' | 'accessories' | 'plan'
 
 export interface CatalogVariant {
   id: string
+  slug: string
   label: string
   swatchColor: string | null
   imageUrl: string | null
@@ -12,6 +13,7 @@ export interface CatalogVariant {
 
 export interface CatalogProduct {
   id: string
+  slug: string
   stepId: string
   name: string
   description: string
@@ -30,6 +32,7 @@ export interface CatalogProduct {
 
 export interface CatalogStep {
   id: string
+  slug: string
   order: number
   title: string
   icon: string
@@ -38,9 +41,12 @@ export interface CatalogStep {
 
 export type SelectionKey = `${string}:${string}`
 
+/** Human-readable keys in app-config.json, e.g. `cam-v4:cam-v4-white` */
+export type SlugSelectionKey = `${string}:${string}`
+
 export interface AppConfig {
   activeStep: number
-  initialSelections: Record<SelectionKey, number>
+  initialSelections: Record<SlugSelectionKey, number>
   shipping: {
     label: string
     compareAt: number | null
