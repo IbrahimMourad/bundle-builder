@@ -67,7 +67,7 @@ insert into public.products (
     'a0000001-0001-4000-8000-000000000003', 'Wyze Sense Hub (Required)',
     'Required hub for Wyze Sense sensors',
     'products/sense-hub.png',
-    29.92, 0, null, 'sensors', '#', null, true, false, 2
+    29.92, 0, null, 'sensors', '#', null, true, true, 2
   ),
   (
     'b0000001-0001-4000-8000-000000000009', 'microsd-256',

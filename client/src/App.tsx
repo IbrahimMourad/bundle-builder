@@ -3,6 +3,7 @@ import { CatalogHydrator } from '@/components/CatalogHydrator'
 import { BuilderShell } from '@/components/builder/BuilderShell'
 import { PageLayout } from '@/components/layout/PageLayout'
 import { ReviewPanel } from '@/components/review/ReviewPanel'
+import { SaveToast } from '@/components/ui/SaveToast'
 
 const CheckoutModal = lazy(() =>
   import('@/components/review/CheckoutModal').then((module) => ({
@@ -18,6 +19,7 @@ function App() {
       <Suspense fallback={null}>
         <CheckoutModal />
       </Suspense>
+      <SaveToast />
     </>
   )
 }

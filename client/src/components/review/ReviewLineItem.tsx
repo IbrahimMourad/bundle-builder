@@ -40,17 +40,19 @@ export const ReviewLineItem = memo(function ReviewLineItem({ item }: ReviewLineI
   )
 
   return (
-    <li className={styles.item}>
+    <li className={isPlan ? `${styles.item} ${styles.itemPlan}` : styles.item}>
       {isPlan ? thumb : <span className={styles.thumbBox}>{thumb}</span>}
       <span className={styles.name}>{label}</span>
-      <QuantityStepper
-        value={quantity}
-        onChange={handleQuantityChange}
-        label={`${label} quantity`}
-        variant="review"
-        disabled={item.product.isRequired}
-        min={item.product.isRequired ? 1 : 0}
-      />
+      {!isPlan ? (
+        <QuantityStepper
+          value={quantity}
+          onChange={handleQuantityChange}
+          label={`${label} quantity`}
+          variant="review"
+          disabled={item.product.isRequired}
+          min={item.product.isRequired ? 1 : 0}
+        />
+      ) : null}
       <div className={styles.price}>
         <Price
           price={lineTotal}

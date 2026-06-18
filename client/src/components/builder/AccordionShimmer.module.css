@@ -1,0 +1,158 @@
+.root {
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+@media (min-width: 64rem) {
+  .root {
+    border-radius: var(--card-radius);
+    box-shadow: var(--shadow-card);
+  }
+}
+
+.step {
+  background: var(--color-surface);
+}
+
+.stepExpanded {
+  background: var(--color-accordion-expanded-bg);
+}
+
+.labelRow {
+  padding: var(--step-label-row-padding-y) var(--step-header-padding-x);
+  border-bottom: 1px solid var(--step-label-row-border-color);
+}
+
+.labelRowNotFirst {
+  border-top: 1px solid var(--step-label-row-border-color);
+}
+
+.label {
+  width: 6rem;
+  height: 0.625rem;
+  border-radius: var(--radius-sm);
+}
+
+.titleRow {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  padding: var(--step-title-row-padding-y) var(--step-header-padding-x);
+}
+
+.icon {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-md);
+}
+
+.title {
+  flex: 1;
+  height: 1.25rem;
+  max-width: 12rem;
+  border-radius: var(--radius-sm);
+}
+
+.trailing {
+  flex-shrink: 0;
+  width: 1rem;
+  height: 1rem;
+  border-radius: var(--radius-sm);
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--product-grid-gap);
+  padding: 0 var(--accordion-panel-padding-x) var(--accordion-panel-padding-bottom);
+}
+
+.card {
+  display: flex;
+  gap: var(--product-card-gap);
+  align-items: center;
+  min-height: var(--product-card-min-height);
+  padding: var(--product-card-padding);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--product-card-radius);
+}
+
+.cardImage {
+  flex-shrink: 0;
+  width: var(--product-card-image-width);
+  height: 5rem;
+  border-radius: var(--radius-md);
+}
+
+.cardBody {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.cardLineLg {
+  width: 70%;
+  height: 1rem;
+  border-radius: var(--radius-sm);
+}
+
+.cardLineMd {
+  width: 90%;
+  height: 0.75rem;
+  border-radius: var(--radius-sm);
+}
+
+.cardLineSm {
+  width: 45%;
+  height: 0.75rem;
+  border-radius: var(--radius-sm);
+}
+
+.cardActions {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.cardStepper {
+  width: 5.5rem;
+  height: 1.25rem;
+  border-radius: var(--radius-sm);
+}
+
+.cardPrice {
+  width: 3.5rem;
+  height: 1.25rem;
+  border-radius: var(--radius-sm);
+}
+
+.button {
+  width: 100%;
+  max-width: 20rem;
+  height: 2.5rem;
+  margin-inline: auto;
+  border-radius: var(--button-outline-radius);
+}
+
+@media (min-width: 48rem) {
+  .panel {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--product-grid-gap-md);
+  }
+
+  .button {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 63.9375rem) {
+  .cardActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

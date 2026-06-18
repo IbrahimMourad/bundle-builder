@@ -63,4 +63,12 @@ describe('useBundleStore', () => {
 
     expect(useBundleStore.getState().quantities[requiredKey]).toBe(1)
   })
+
+  it('shows save confirmation after persisting bundle state', () => {
+    useBundleStore.getState().hydrateFromCatalog(mockCatalog)
+
+    useBundleStore.getState().saveToStorage()
+
+    expect(useBundleStore.getState().saveToastVisible).toBe(true)
+  })
 })

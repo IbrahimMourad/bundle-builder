@@ -121,6 +121,11 @@
   --layout-gap: var(--space-6);
   --layout-sticky-top: var(--space-6);
   --layout-page-padding: var(--space-6);
+  --min-viewport-height: 100vh;
+  --review-panel-padding-y: var(--space-15);
+  --review-panel-padding-x: var(--space-20);
+  --accordion-panel-padding-x: var(--space-15);
+  --accordion-panel-padding-bottom: var(--space-15);
 
   /* Breakpoints (for reference in media queries) */
   --bp-tablet: 48rem;
@@ -229,4 +234,40 @@
   --stepper-icon-size: 0.5rem; /* 8px */
   --stepper-button-bg-card: var(--color-stepper-button-bg-card);
   --stepper-button-bg-review: var(--color-stepper-button-bg-review);
+}
+
+@media (max-width: 63.9375rem) {
+  :root {
+    --layout-page-padding: 0;
+    --layout-gap: var(--space-4);
+    --review-panel-padding-y: var(--space-4);
+    --review-panel-padding-x: var(--space-4);
+    --accordion-panel-padding-x: var(--space-4);
+    --accordion-panel-padding-bottom: var(--space-4);
+    --step-header-padding-x: var(--space-4);
+    --step-label-row-padding-y: var(--space-2);
+    --step-title-row-padding-y: var(--space-4);
+    --step-title-size: var(--font-size-lg);
+    --product-card-padding: var(--space-4);
+    --product-card-gap: var(--space-4);
+    --product-card-min-height: auto;
+    --product-card-image-width: 5rem;
+    --product-grid-gap: var(--space-3);
+    --product-grid-gap-md: var(--space-4);
+  }
+}
+
+/* iOS Safari: prefer dynamic viewport units, fall back to -webkit-fill-available */
+@supports (min-height: 100dvh) {
+  :root {
+    --min-viewport-height: 100dvh;
+  }
+}
+
+@supports not (min-height: 100dvh) {
+  @supports (-webkit-touch-callout: none) {
+    :root {
+      --min-viewport-height: -webkit-fill-available;
+    }
+  }
 }

@@ -3,6 +3,7 @@ import { useBundleStore } from '@/stores/useBundleStore'
 import { selectReviewLineItems, selectTotals } from '@/stores/bundleSelectors'
 import { CATEGORY_HEADINGS, CATEGORY_ORDER } from './reviewCategories'
 import { CheckoutSummary } from './CheckoutSummary'
+import { ReviewPanelShimmer } from './ReviewPanelShimmer'
 import { ReviewSection } from './ReviewSection'
 import styles from './ReviewPanel.module.css'
 
@@ -12,7 +13,7 @@ export function ReviewPanel() {
   const quantities = useBundleStore((state) => state.quantities)
 
   if (isPending || !hasHydrated) {
-    return <p className={styles.status}>Loading review…</p>
+    return <ReviewPanelShimmer />
   }
 
   if (isError || !catalog) {

@@ -226,7 +226,7 @@
       "learnMoreUrl": "#",
       "priceLabel": null,
       "isRequired": true,
-      "showInBuilder": false,
+      "showInBuilder": true,
       "sortOrder": 2,
       "variants": []
     },

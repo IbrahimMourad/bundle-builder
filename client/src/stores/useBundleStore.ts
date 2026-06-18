@@ -16,6 +16,7 @@ interface BundleState {
   quantities: Record<SelectionKey, number>
   requiredSelectionKeys: ReadonlySet<SelectionKey>
   isCheckoutOpen: boolean
+  saveToastVisible: boolean
 
   hydrateFromCatalog: (data: CatalogResponse) => void
   hydrateFromStorage: (saved: SavedBundle, catalog: CatalogResponse) => void
@@ -23,6 +24,7 @@ interface BundleState {
   setSelectedVariant: (productId: string, variantId: string) => void
   setQuantity: (key: SelectionKey, qty: number) => void
   saveToStorage: () => void
+  dismissSaveToast: () => void
   openCheckout: () => void
   closeCheckout: () => void
   reset: () => void
@@ -35,6 +37,7 @@ const initialState = {
   quantities: {},
   requiredSelectionKeys: new Set<SelectionKey>(),
   isCheckoutOpen: false,
+  saveToastVisible: false,
 }
 
 function buildInitialVariantSelection(
@@ -123,7 +126,10 @@ export const useBundleStore = create<BundleState>((set, get) => ({
   saveToStorage: () => {
     const { activeStep, quantities, selectedVariantByProduct } = get()
     saveBundle({ activeStep, quantities, selectedVariantByProduct })
+    set({ saveToastVisible: true })
   },
+
+  dismissSaveToast: () => set({ saveToastVisible: false }),
 
   openCheckout: () => set({ isCheckoutOpen: true }),
   closeCheckout: () => set({ isCheckoutOpen: false }),

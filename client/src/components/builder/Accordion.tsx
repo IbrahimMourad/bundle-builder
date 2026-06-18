@@ -1,7 +1,9 @@
 import { useCatalog } from '@/hooks/useCatalog'
+import { isMobileLayout, scrollToReviewPanel, scrollToStep } from '@/lib/layout'
 import { useBundleStore } from '@/stores/useBundleStore'
 import { selectDistinctSelectedCountPerStep } from '@/stores/bundleSelectors'
 import { NextStepButton } from './NextStepButton'
+import { AccordionShimmer } from './AccordionShimmer'
 import { ProductGrid } from './ProductGrid'
 import { StepHeader } from './StepHeader'
 import styles from './Accordion.module.css'
@@ -14,7 +16,7 @@ export function Accordion() {
   const setActiveStep = useBundleStore((state) => state.setActiveStep)
 
   if (isPending || !hasHydrated) {
-    return <p className={styles.status}>Loading catalog…</p>
+    return <AccordionShimmer />
   }
 
   if (isError || !catalog) {
@@ -24,8 +26,23 @@ export function Accordion() {
   const selectedCountByStep = selectDistinctSelectedCountPerStep({ quantities }, catalog)
 
   function goToNextStep(currentOrder: number) {
+    const totalSteps = catalog!.steps.length
+    const isLastStep = currentOrder === totalSteps
+
+    if (isLastStep && isMobileLayout()) {
+      setActiveStep(0)
+      scrollToReviewPanel()
+      return
+    }
+
     const nextStep = catalog!.steps.find((step) => step.order === currentOrder + 1)
-    if (nextStep) setActiveStep(nextStep.order)
+
+    if (nextStep) {
+      setActiveStep(nextStep.order)
+      if (isMobileLayout()) {
+        scrollToStep(nextStep.slug)
+      }
+    }
   }
 
   return (
@@ -40,12 +57,14 @@ export function Accordion() {
         return (
           <section
             key={step.id}
+            id={`step-${step.slug}`}
             className={isExpanded ? styles.stepExpanded : styles.stepCollapsed}
           >
             <StepHeader
               step={step}
               totalSteps={catalog.steps.length}
               isExpanded={isExpanded}
+              isFirstStep={step.order === 1}
               selectedCount={selectedCountByStep[step.id] ?? 0}
               panelId={panelId}
               onToggle={() => setActiveStep(step.order)}
@@ -54,7 +73,11 @@ export function Accordion() {
             {isExpanded ? (
               <div id={panelId} className={styles.panel}>
                 <ProductGrid products={stepProducts} />
-                <NextStepButton label={step.nextLabel} onClick={() => goToNextStep(step.order)} />
+                <NextStepButton
+                  label={step.nextLabel}
+                  onClick={() => goToNextStep(step.order)}
+                  hideOnDesktop={step.order === catalog.steps.length}
+                />
               </div>
             ) : null}
           </section>
