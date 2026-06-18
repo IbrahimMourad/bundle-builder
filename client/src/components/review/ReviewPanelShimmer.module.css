@@ -1,0 +1,147 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--review-panel-padding-y) var(--review-panel-padding-x);
+  background: var(--color-review-bg);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow-panel);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.eyebrow {
+  width: 4rem;
+  height: 0.875rem;
+  border-radius: var(--radius-sm);
+}
+
+.title {
+  width: 11rem;
+  height: 1.5rem;
+  border-radius: var(--radius-sm);
+}
+
+.subtitle {
+  width: 100%;
+  height: 0.875rem;
+  border-radius: var(--radius-sm);
+}
+
+.subtitleShort {
+  width: 75%;
+  height: 0.875rem;
+  border-radius: var(--radius-sm);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.sectionHeading {
+  width: 5rem;
+  height: 0.75rem;
+  border-radius: var(--radius-sm);
+}
+
+.lineItem {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.thumb {
+  width: var(--review-product-thumb-box-size);
+  height: var(--review-product-thumb-box-size);
+  border-radius: var(--review-product-thumb-box-radius);
+}
+
+.name {
+  height: 0.875rem;
+  border-radius: var(--radius-sm);
+}
+
+.stepper {
+  width: 4.5rem;
+  height: 1.25rem;
+  border-radius: var(--radius-sm);
+}
+
+.price {
+  width: 3rem;
+  height: 1.25rem;
+  border-radius: var(--radius-sm);
+}
+
+.divider {
+  height: 1px;
+  margin-block: var(--space-2);
+  background: var(--review-divider-color);
+}
+
+.checkout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.checkoutHero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.badge {
+  flex-shrink: 0;
+  width: 4.875rem;
+  height: 4.875rem;
+  border-radius: var(--radius-full);
+}
+
+.totals {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-2);
+}
+
+.totalPill {
+  width: 7rem;
+  height: 1.25rem;
+  border-radius: var(--radius-full);
+}
+
+.totalLg {
+  width: 6rem;
+  height: 2rem;
+  border-radius: var(--radius-sm);
+}
+
+.checkoutButton {
+  width: 100%;
+  height: 2.75rem;
+  border-radius: var(--checkout-button-radius);
+}
+
+.saveLink {
+  width: 9rem;
+  height: 0.875rem;
+  margin-inline: auto;
+  border-radius: var(--radius-sm);
+}
+
+@media (max-width: 63.9375rem) {
+  .panel {
+    border-radius: 0;
+    box-shadow: none;
+  }
+}

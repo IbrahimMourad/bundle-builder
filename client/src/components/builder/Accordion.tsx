@@ -1,8 +1,9 @@
 import { useCatalog } from '@/hooks/useCatalog'
-import { isMobileLayout, scrollToReviewPanel } from '@/lib/layout'
+import { isMobileLayout, scrollToReviewPanel, scrollToStep } from '@/lib/layout'
 import { useBundleStore } from '@/stores/useBundleStore'
 import { selectDistinctSelectedCountPerStep } from '@/stores/bundleSelectors'
 import { NextStepButton } from './NextStepButton'
+import { AccordionShimmer } from './AccordionShimmer'
 import { ProductGrid } from './ProductGrid'
 import { StepHeader } from './StepHeader'
 import styles from './Accordion.module.css'
@@ -15,7 +16,7 @@ export function Accordion() {
   const setActiveStep = useBundleStore((state) => state.setActiveStep)
 
   if (isPending || !hasHydrated) {
-    return <p className={styles.status}>Loading catalog…</p>
+    return <AccordionShimmer />
   }
 
   if (isError || !catalog) {
@@ -35,7 +36,13 @@ export function Accordion() {
     }
 
     const nextStep = catalog!.steps.find((step) => step.order === currentOrder + 1)
-    if (nextStep) setActiveStep(nextStep.order)
+
+    if (nextStep) {
+      setActiveStep(nextStep.order)
+      if (isMobileLayout()) {
+        scrollToStep(nextStep.slug)
+      }
+    }
   }
 
   return (
@@ -50,6 +57,7 @@ export function Accordion() {
         return (
           <section
             key={step.id}
+            id={`step-${step.slug}`}
             className={isExpanded ? styles.stepExpanded : styles.stepCollapsed}
           >
             <StepHeader
