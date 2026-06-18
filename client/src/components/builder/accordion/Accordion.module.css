@@ -9,14 +9,17 @@
 .stepExpanded,
 .stepCollapsed {
   overflow: hidden;
-  background: var(--color-surface);
   border: none;
   border-radius: 0;
   box-shadow: none;
   scroll-margin-top: var(--space-4);
 }
 
-.stepExpanded .panel {
+.stepCollapsed {
+  background: var(--color-surface);
+}
+
+.stepExpanded {
   background: var(--color-accordion-expanded-bg);
 }
 
