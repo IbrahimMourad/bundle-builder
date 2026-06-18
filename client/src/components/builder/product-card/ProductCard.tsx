@@ -1,7 +1,7 @@
 import { memo, useCallback } from 'react'
-import { Badge } from '@/components/ui/Badge'
-import { Price } from '@/components/ui/Price'
-import { QuantityStepper } from '@/components/ui/QuantityStepper'
+import { Badge } from '@/components/ui/badge/Badge'
+import { Price } from '@/components/ui/price/Price'
+import { QuantityStepper } from '@/components/ui/quantity-stepper/QuantityStepper'
 import {
   getActiveVariantId,
   getProductTotalQuantity,
@@ -10,7 +10,7 @@ import {
 } from '@/lib/selectionKey'
 import { useBundleStore } from '@/stores/useBundleStore'
 import type { CatalogProduct, SelectionKey } from '@/types/catalog'
-import { VariantSelector } from './VariantSelector'
+import { VariantSelector } from '../variant-selector/VariantSelector'
 import styles from './ProductCard.module.css'
 
 interface ProductCardProps {

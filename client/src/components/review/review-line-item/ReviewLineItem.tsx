@@ -1,6 +1,6 @@
 import { memo, useCallback } from 'react'
-import { Price } from '@/components/ui/Price'
-import { QuantityStepper } from '@/components/ui/QuantityStepper'
+import { Price } from '@/components/ui/price/Price'
+import { QuantityStepper } from '@/components/ui/quantity-stepper/QuantityStepper'
 import type { ReviewLineItem as ReviewLineItemData } from '@/lib/pricing'
 import { formatReviewProductLabel } from '@/lib/variants'
 import { useBundleStore } from '@/stores/useBundleStore'

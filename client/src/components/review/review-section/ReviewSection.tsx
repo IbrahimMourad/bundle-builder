@@ -1,6 +1,6 @@
 import type { ReviewLineItem as ReviewLineItemData } from '@/lib/pricing'
-import { ReviewDivider } from './ReviewDivider'
-import { ReviewLineItem } from './ReviewLineItem'
+import { ReviewDivider } from '../review-divider/ReviewDivider'
+import { ReviewLineItem } from '../review-line-item/ReviewLineItem'
 import styles from './ReviewSection.module.css'
 
 interface ReviewSectionProps {

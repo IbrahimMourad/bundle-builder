@@ -1,10 +1,10 @@
 import { useCatalog } from '@/hooks/useCatalog'
 import { useBundleStore } from '@/stores/useBundleStore'
 import { selectReviewLineItems, selectTotals } from '@/stores/bundleSelectors'
-import { CATEGORY_HEADINGS, CATEGORY_ORDER } from './reviewCategories'
-import { CheckoutSummary } from './CheckoutSummary'
-import { ReviewPanelShimmer } from './ReviewPanelShimmer'
-import { ReviewSection } from './ReviewSection'
+import { CATEGORY_HEADINGS, CATEGORY_ORDER } from '../reviewCategories'
+import { CheckoutSummary } from '../checkout-summary/CheckoutSummary'
+import { ReviewPanelShimmer } from '../review-panel-shimmer/ReviewPanelShimmer'
+import { ReviewSection } from '../review-section/ReviewSection'
 import styles from './ReviewPanel.module.css'
 
 export function ReviewPanel() {

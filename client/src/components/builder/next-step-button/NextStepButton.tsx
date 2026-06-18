@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/Button'
+import { Button } from '@/components/ui/button/Button'
 import styles from './NextStepButton.module.css'
 
 interface NextStepButtonProps {

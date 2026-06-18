@@ -16,22 +16,26 @@ cp server/.env.example server/.env
 npm run dev
 ```
 
-| URL | Service |
-|-----|---------|
-| http://localhost:5173 | React client (Vite) |
-| http://localhost:3001/api/health | Express BFF health check |
-| http://localhost:3001/api/catalog | Catalog API |
+
+| URL                                                                    | Service                  |
+| ---------------------------------------------------------------------- | ------------------------ |
+| [http://localhost:5173](http://localhost:5173)                         | React client (Vite)      |
+| [http://localhost:3001/api/health](http://localhost:3001/api/health)   | Express BFF health check |
+| [http://localhost:3001/api/catalog](http://localhost:3001/api/catalog) | Catalog API              |
+
 
 The app runs fully offline by default. Supabase is optional — see [Supabase setup](#supabase-setup-optional) below.
 
 ## Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start client (`:5173`) and server (`:3001`) concurrently |
-| `npm run build` | Type-check and build server + client for production |
-| `npm run test` | Run client unit tests (Vitest + React Testing Library) |
-| `npm run lint` | ESLint on the client workspace |
+
+| Command         | Description                                              |
+| --------------- | -------------------------------------------------------- |
+| `npm run dev`   | Start client (`:5173`) and server (`:3001`) concurrently |
+| `npm run build` | Type-check and build server + client for production      |
+| `npm run test`  | Run client unit tests (Vitest + React Testing Library)   |
+| `npm run lint`  | ESLint on the client workspace                           |
+
 
 Production server after build:
 
@@ -54,28 +58,32 @@ Express BFF
   └─ Local fallback       →  server/src/data/catalog.json
 ```
 
-| Layer | Choice |
-|-------|--------|
-| UI state | Zustand (`client/src/stores/useBundleStore.ts`) |
-| Server state | TanStack Query (`useCatalog`) |
-| Styling | CSS Modules + design tokens (`client/src/styles/tokens.css`) |
-| Tests | Vitest + React Testing Library |
-| Database | Supabase (anon key, RLS read-only) when configured |
+
+| Layer        | Choice                                                       |
+| ------------ | ------------------------------------------------------------ |
+| UI state     | Zustand (`client/src/stores/useBundleStore.ts`)              |
+| Server state | TanStack Query (`useCatalog`)                                |
+| Styling      | CSS Modules + design tokens (`client/src/styles/tokens.css`) |
+| Tests        | Vitest + React Testing Library                               |
+| Database     | Supabase (anon key, RLS read-only) when configured           |
+
 
 ### Data split
 
-| In Supabase | In bundled JSON |
-|-------------|-----------------|
+
+| In Supabase                                          | In bundled JSON                                                                          |
+| ---------------------------------------------------- | ---------------------------------------------------------------------------------------- |
 | `steps`, `products`, `variants` (UUID `id` + `slug`) | `app-config.json`: `activeStep`, slug-based `initialSelections`, `shipping`, `financing` |
-| | `catalog.json`: full offline API response |
+|                                                      | `catalog.json`: full offline API response                                                |
+
 
 The BFF merges Supabase rows with `app-config.json` and resolves slug selection keys to UUID keys before responding.
 
 ### Selection model
 
-- Client keys: `` `${productUuid}:${variantUuid | 'default'}` ``
+- Client keys: ``${productUuid}:${variantUuid | 'default'}``
 - Each variant has its own quantity; the card stepper edits the **active** variant chip
-- Review lists every variant with quantity &gt; 0 as a separate line
+- Review lists every variant with quantity > 0 as a separate line
 - Required products (Sense Hub) stay locked at quantity 1
 
 ## Environment
@@ -99,11 +107,11 @@ Without `SUPABASE_URL` and `SUPABASE_ANON_KEY`, the server serves `server/src/da
 ## Supabase setup (optional)
 
 1. Create a Supabase project.
-2. Run migrations in order from [`supabase/migrations/`](supabase/migrations/) — see [`supabase/README.md`](supabase/README.md) for fresh vs upgrade paths.
+2. Run migrations in order from `[supabase/migrations/](supabase/migrations/)` — see `[supabase/README.md](supabase/README.md)` for fresh vs upgrade paths.
 3. Set `SUPABASE_URL` and `SUPABASE_ANON_KEY` in `server/.env`.
 4. Upload catalog assets: `npm run upload-catalog-assets -w server` (requires `SUPABASE_SERVICE_ROLE_KEY` locally).
 
-Detailed migration notes, asset paths, and security policies are in [`supabase/README.md`](supabase/README.md).
+Detailed migration notes, asset paths, and security policies are in `[supabase/README.md](supabase/README.md)`.
 
 ## Persistence
 
@@ -122,18 +130,24 @@ Initial bundle matches the design reference:
 client/          React 19 + Vite + TypeScript
 server/          Express 5 BFF + catalog service
 supabase/        SQL migrations and seed data
-task/            Take-home spec and design references
 ```
 
 Key client paths:
 
 ```
-client/src/components/builder/   Accordion, ProductCard, VariantSelector
-client/src/components/review/    ReviewPanel, CheckoutSummary
-client/src/stores/               useBundleStore
-client/src/lib/                  pricing, storage, reconcileSelections
-client/src/test/                 renderWithProviders, fixtures
+client/src/components/
+  builder/accordion/          Accordion + styles + tests
+  builder/product-card/       ProductCard, VariantSelector usage
+  review/review-panel/        ReviewPanel, CheckoutSummary
+  ui/                         Shared primitives (button, price, stepper, …)
+  layout/page-layout/         Page shell
+  catalog-hydrator/           Catalog → store hydration
+client/src/stores/            useBundleStore
+client/src/lib/               pricing, storage, reconcileSelections
+client/src/test/              renderWithProviders, fixtures
 ```
+
+Each component lives in its own kebab-case folder with co-located `.module.css` and `.test.tsx` files where applicable.
 
 ## Decisions and tradeoffs
 

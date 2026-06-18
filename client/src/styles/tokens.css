@@ -7,7 +7,7 @@
   --color-primary-muted: #c4b5fd;
 
   /* Surfaces */
-  --color-page-bg: #f5f6f8;
+  --color-page-bg: #ffffff;
   --color-surface: #ffffff;
   --color-review-bg: #edf4ff;
   --color-accordion-expanded-bg: var(--color-review-bg);
